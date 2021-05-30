@@ -21,7 +21,6 @@ Public API and Key Messages:
 Trait {
 	#name : #EDACTErrorHelper,
 	#traits : 'EDACTLogging',
-	#classTraits : 'EDACTLogging classTrait',
 	#category : #'EDAC-Traits'
 }
 

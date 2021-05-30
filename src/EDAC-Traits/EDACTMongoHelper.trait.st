@@ -1,7 +1,6 @@
 Trait {
 	#name : #EDACTMongoHelper,
 	#traits : 'EDACTCollectionHelper',
-	#classTraits : 'EDACTCollectionHelper classTrait',
 	#category : #'EDAC-Traits'
 }
 
