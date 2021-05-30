@@ -1,13 +1,13 @@
 Class {
-	#name : #EDATSettingsHelperTest,
+	#name : #EDACTSettingsHelperTest,
 	#superclass : #TestCase,
-	#traits : 'EDATSettingsHelper',
-	#classTraits : 'EDATSettingsHelper classTrait',
+	#traits : 'EDACTSettingsHelper',
+	#classTraits : 'EDACTSettingsHelper classTrait',
 	#category : #'EDAC-Traits-Tests'
 }
 
 { #category : #tests }
-EDATSettingsHelperTest >> testFlattenedSettings [
+EDACTSettingsHelperTest >> testFlattenedSettings [
 	| actual env |
 	env := {('a' -> 'b')} asDictionary.
 	actual := self class retrieveSettingAsDict: 'a' using: env.
@@ -15,7 +15,7 @@ EDATSettingsHelperTest >> testFlattenedSettings [
 ]
 
 { #category : #tests }
-EDATSettingsHelperTest >> testFlattenedSettingsWithDictionary [
+EDACTSettingsHelperTest >> testFlattenedSettingsWithDictionary [
 	| actual env |
 	env := {('a' -> 'b').
 	('c' -> {('d' -> 'e')} asDictionary)} asDictionary.
@@ -24,7 +24,7 @@ EDATSettingsHelperTest >> testFlattenedSettingsWithDictionary [
 ]
 
 { #category : #tests }
-EDATSettingsHelperTest >> testNestedSettings [
+EDACTSettingsHelperTest >> testNestedSettings [
 	| actual env |
 	env := {('a' -> 'b').
 	('c' -> {('d' -> {('e' -> 'f')} asDictionary)} asDictionary)} asDictionary.

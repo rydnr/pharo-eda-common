@@ -1,13 +1,13 @@
 Class {
-	#name : #EDATCollectionHelperTest,
+	#name : #EDACTCollectionHelperTest,
 	#superclass : #TestCase,
-	#traits : 'EDATCollectionHelper',
-	#classTraits : 'EDATCollectionHelper classTrait',
+	#traits : 'EDACTCollectionHelper',
+	#classTraits : 'EDACTCollectionHelper classTrait',
 	#category : #'EDAC-Traits-Tests'
 }
 
 { #category : #tests }
-EDATCollectionHelperTest >> testCsvToCollectionTrims [
+EDACTCollectionHelperTest >> testCsvToCollectionTrims [
 	| sample actual expected |
 	sample := 'a ,   b ,c'.
 	expected := OrderedCollection with: 'a' with: 'b' with: 'c'.
@@ -16,7 +16,7 @@ EDATCollectionHelperTest >> testCsvToCollectionTrims [
 ]
 
 { #category : #tests }
-EDATCollectionHelperTest >> testCsvToCollectionTrivial [
+EDACTCollectionHelperTest >> testCsvToCollectionTrivial [
 	| sample actual expected |
 	sample := 'a,b,c'.
 	expected := OrderedCollection with: 'a' with: 'b' with: 'c'.
@@ -25,7 +25,7 @@ EDATCollectionHelperTest >> testCsvToCollectionTrivial [
 ]
 
 { #category : #tests }
-EDATCollectionHelperTest >> testFlatten [
+EDACTCollectionHelperTest >> testFlatten [
 	| sample a b c d e actual expected |
 	a := 'a'.
 	b := {('1' -> 'a').
@@ -52,7 +52,7 @@ EDATCollectionHelperTest >> testFlatten [
 ]
 
 { #category : #tests }
-EDATCollectionHelperTest >> testRemoveDuplicatesInMatching [
+EDACTCollectionHelperTest >> testRemoveDuplicatesInMatching [
 	| fixture trimmed |
 	fixture := {{('id' -> 'foo').
 	('field' -> 'something')} asDictionary.

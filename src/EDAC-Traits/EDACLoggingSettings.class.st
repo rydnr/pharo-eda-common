@@ -1,5 +1,5 @@
 Class {
-	#name : #EDALoggingSettings,
+	#name : #EDACLoggingSettings,
 	#superclass : #Object,
 	#classInstVars : [
 		'debugEnabled',
@@ -13,62 +13,62 @@ Class {
 }
 
 { #category : #accessing }
-EDALoggingSettings class >> debugEnabled [
+EDACLoggingSettings class >> debugEnabled [
 	^ debugEnabled
 ]
 
 { #category : #accessing }
-EDALoggingSettings class >> debugEnabled: aBoolean [
+EDACLoggingSettings class >> debugEnabled: aBoolean [
 	debugEnabled := aBoolean.
 	aBoolean
 		ifTrue: [ self infoEnabled: true ]
 ]
 
 { #category : #'class initialization' }
-EDALoggingSettings class >> doInitialize [
+EDACLoggingSettings class >> doInitialize [
 	self loggingLevel: 'debug'
 
 ]
 
 { #category : #accessing }
-EDALoggingSettings class >> errorEnabled [
+EDACLoggingSettings class >> errorEnabled [
 	^ errorEnabled
 ]
 
 { #category : #accessing }
-EDALoggingSettings class >> errorEnabled: aBoolean [
+EDACLoggingSettings class >> errorEnabled: aBoolean [
 	errorEnabled := aBoolean
 ]
 
 { #category : #accessing }
-EDALoggingSettings class >> infoEnabled [
+EDACLoggingSettings class >> infoEnabled [
 	^ infoEnabled
 ]
 
 { #category : #accessing }
-EDALoggingSettings class >> infoEnabled: aBoolean [
+EDACLoggingSettings class >> infoEnabled: aBoolean [
 	infoEnabled := aBoolean.
 	aBoolean
 		ifTrue: [ self warningEnabled: true ]
 ]
 
 { #category : #'class initialization' }
-EDALoggingSettings class >> initialize [
+EDACLoggingSettings class >> initialize [
 	self doInitialize
 ]
 
 { #category : #accessing }
-EDALoggingSettings class >> levels [
+EDACLoggingSettings class >> levels [
 	^ #('trace' 'debug' 'info' 'warning' 'error')
 ]
 
 { #category : #accessing }
-EDALoggingSettings class >> loggingLevel [
+EDACLoggingSettings class >> loggingLevel [
 	^ loggingLevel
 ]
 
 { #category : #accessing }
-EDALoggingSettings class >> loggingLevel: aLevel [
+EDACLoggingSettings class >> loggingLevel: aLevel [
 	| failed |
 	failed := true.
 	self traceEnabled: (aLevel = 'trace').
@@ -84,24 +84,24 @@ EDALoggingSettings class >> loggingLevel: aLevel [
 ]
 
 { #category : #accessing }
-EDALoggingSettings class >> traceEnabled [
+EDACLoggingSettings class >> traceEnabled [
 	^ traceEnabled
 ]
 
 { #category : #accessing }
-EDALoggingSettings class >> traceEnabled: aBoolean [
+EDACLoggingSettings class >> traceEnabled: aBoolean [
 	traceEnabled := aBoolean.
 	aBoolean
 		ifTrue: [ self debugEnabled: true ]
 ]
 
 { #category : #accessing }
-EDALoggingSettings class >> warningEnabled [
+EDACLoggingSettings class >> warningEnabled [
 	^ warningEnabled
 ]
 
 { #category : #accessing }
-EDALoggingSettings class >> warningEnabled: aBoolean [
+EDACLoggingSettings class >> warningEnabled: aBoolean [
 	warningEnabled := aBoolean.
 	aBoolean
 		ifTrue: [ self errorEnabled: true ]

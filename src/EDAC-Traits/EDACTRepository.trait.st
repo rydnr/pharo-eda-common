@@ -1,10 +1,10 @@
 Trait {
-	#name : #EDATRepository,
+	#name : #EDACTRepository,
 	#category : #'EDAC-Traits'
 }
 
 { #category : #helpers }
-EDATRepository classSide >> groupEventsById: events [
+EDACTRepository classSide >> groupEventsById: events [
 	| result |
 	result := Dictionary new.
 	events

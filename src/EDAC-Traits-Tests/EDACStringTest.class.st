@@ -1,11 +1,11 @@
 Class {
-	#name : #EDAStringTest,
+	#name : #EDACStringTest,
 	#superclass : #TestCase,
 	#category : #'EDAC-Traits-Tests'
 }
 
 { #category : #tests }
-EDAStringTest >> testAsURLWorkWithNonAscii [
+EDACStringTest >> testAsURLWorkWithNonAscii [
 	self
 		shouldnt:
 			[ 'https://s3-eu-west-1.amazonaws.com/mail-templates.core.contestia.nexplore.com/00005/Test challenge 4 María/invitationAccepted_BOTH.tmpl'

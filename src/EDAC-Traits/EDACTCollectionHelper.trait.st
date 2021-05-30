@@ -1,10 +1,10 @@
 Trait {
-	#name : #EDATCollectionHelper,
+	#name : #EDACTCollectionHelper,
 	#category : #'EDAC-Traits'
 }
 
 { #category : #helper }
-EDATCollectionHelper classSide >> concatenateCollection: aCollection with: aSeparator [
+EDACTCollectionHelper classSide >> concatenateCollection: aCollection with: aSeparator [
 	| txt |
 	txt := ''.
 	aCollection
@@ -16,7 +16,7 @@ EDATCollectionHelper classSide >> concatenateCollection: aCollection with: aSepa
 ]
 
 { #category : #helper }
-EDATCollectionHelper classSide >> csvToCollection: aString [
+EDACTCollectionHelper classSide >> csvToCollection: aString [
 	| result |
 	result := OrderedCollection new.
 	aString splitOn: ',' do: [ :s | result add: s trim ].
@@ -24,7 +24,7 @@ EDATCollectionHelper classSide >> csvToCollection: aString [
 ]
 
 { #category : #helper }
-EDATCollectionHelper classSide >> flatten: aCollection [
+EDACTCollectionHelper classSide >> flatten: aCollection [
 	| result |
 	result := OrderedCollection new.
 	aCollection
@@ -36,7 +36,7 @@ EDATCollectionHelper classSide >> flatten: aCollection [
 ]
 
 { #category : #helper }
-EDATCollectionHelper classSide >> removeDuplicatesIn: aCollection matching: aBlock [
+EDACTCollectionHelper classSide >> removeDuplicatesIn: aCollection matching: aBlock [
 	| result duplicates |
 	duplicates := aCollection
 		select:
@@ -52,22 +52,22 @@ EDATCollectionHelper classSide >> removeDuplicatesIn: aCollection matching: aBlo
 ]
 
 { #category : #helper }
-EDATCollectionHelper >> concatenateCollection: aCollection with: aSeparator [
+EDACTCollectionHelper >> concatenateCollection: aCollection with: aSeparator [
 	^ self class concatenateCollection: aCollection with: aSeparator
 
 ]
 
 { #category : #helper }
-EDATCollectionHelper >> csvToCollection: aString [
+EDACTCollectionHelper >> csvToCollection: aString [
 	^ self class csvToCollection: aString
 ]
 
 { #category : #helper }
-EDATCollectionHelper >> flatten: aCollection [
+EDACTCollectionHelper >> flatten: aCollection [
 	^ self class flatten: aCollection
 ]
 
 { #category : #helper }
-EDATCollectionHelper >> removeDuplicatesIn: aCollection matching: aBlock [
+EDACTCollectionHelper >> removeDuplicatesIn: aCollection matching: aBlock [
 	^ self class removeDuplicatesIn: aCollection matching: aBlock
 ]

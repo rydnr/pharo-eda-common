@@ -1,11 +1,12 @@
 Trait {
-	#name : #EDATMongoHelper,
-	#traits : 'EDATCollectionHelper',
+	#name : #EDACTMongoHelper,
+	#traits : 'EDACTCollectionHelper',
+	#classTraits : 'EDACTCollectionHelper classTrait',
 	#category : #'EDAC-Traits'
 }
 
 { #category : #persistence }
-EDATMongoHelper >> initBackendRepository [
+EDACTMongoHelper >> initBackendRepository [
 	| result |
 	result := self mongoRepositoryClass
 		mongoUrls: (self csvToCollection: self class urls)
