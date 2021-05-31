@@ -1,10 +1,10 @@
 Trait {
-	#name : #EDACTSettingsHelper,
+	#name : #EDACSettingsHelper,
 	#category : #'EDAC-Traits'
 }
 
 { #category : #helpers }
-EDACTSettingsHelper classSide >> retrieveFlattenedSettingAsDict: entryName using: env [
+EDACSettingsHelper classSide >> retrieveFlattenedSettingAsDict: entryName using: env [
 	"Retrieves the setting found under given name"
 
 	| result |
@@ -13,14 +13,14 @@ EDACTSettingsHelper classSide >> retrieveFlattenedSettingAsDict: entryName using
 ]
 
 { #category : #helpers }
-EDACTSettingsHelper classSide >> retrieveSettingAsDict: entryName [
+EDACSettingsHelper classSide >> retrieveSettingAsDict: entryName [
 	"Retrieves the setting found under given name"
 	^ self retrieveSettingAsDict: entryName using: (self duEnvironmentClass)
 
 ]
 
 { #category : #helpers }
-EDACTSettingsHelper classSide >> retrieveSettingAsDict: entryName using: env [
+EDACSettingsHelper classSide >> retrieveSettingAsDict: entryName using: env [
 	"Retrieves the setting found under given name"
 
 	| result |

@@ -27,27 +27,27 @@ I'm a trait, so I don't have state. This means I'm pretty limited unless I can a
 So far such entity doesn't exist, and meanwhile I log everything to Transcript and flush it inmediately, but for DEBUG messages. Such messages get flushed every once in 10, in average.
 "
 Trait {
-	#name : #EDACTLogging,
+	#name : #EDACLogging,
 	#category : #'EDAC-Traits'
 }
 
 { #category : #logging }
-EDACTLogging classSide >> beautifyByDefault [
+EDACLogging classSide >> beautifyByDefault [
 	^ true
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> defaultStream [
+EDACLogging classSide >> defaultStream [
 	^ self stdout
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> logDebugMessage: aMessage [
+EDACLogging classSide >> logDebugMessage: aMessage [
 	^ self logDebugMessage: aMessage beautify: self beautifyByDefault
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> logDebugMessage: aMessage beautify: aBoolean [
+EDACLogging classSide >> logDebugMessage: aMessage beautify: aBoolean [
 	EDACLoggingSettings debugEnabled
 		ifTrue: [ self
 				logMessage: aMessage
@@ -57,17 +57,17 @@ EDACTLogging classSide >> logDebugMessage: aMessage beautify: aBoolean [
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> logErrorMessage: aMessage [
+EDACLogging classSide >> logErrorMessage: aMessage [
 	^ self logErrorMessage: aMessage beautify: self beautifyByDefault
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> logErrorMessage: aMessage andThrow: anExceptionClass [
+EDACLogging classSide >> logErrorMessage: aMessage andThrow: anExceptionClass [
 	^ self logErrorMessage: aMessage beautify: self beautifyByDefault andThrow: anExceptionClass
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> logErrorMessage: aMessage beautify: aBoolean [
+EDACLogging classSide >> logErrorMessage: aMessage beautify: aBoolean [
 	EDACLoggingSettings errorEnabled
 		ifTrue: [ self
 				logMessage: aMessage
@@ -77,18 +77,18 @@ EDACTLogging classSide >> logErrorMessage: aMessage beautify: aBoolean [
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> logErrorMessage: aMessage beautify: aBoolean andThrow: anExceptionClass [
+EDACLogging classSide >> logErrorMessage: aMessage beautify: aBoolean andThrow: anExceptionClass [
 	self logErrorMessage: aMessage beautify: aBoolean.
 	anExceptionClass signal: aMessage
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> logInfoMessage: aMessage [
+EDACLogging classSide >> logInfoMessage: aMessage [
 	^ self logInfoMessage: aMessage beautify: self beautifyByDefault 
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> logInfoMessage: aMessage beautify: aBoolean [
+EDACLogging classSide >> logInfoMessage: aMessage beautify: aBoolean [
 	EDACLoggingSettings infoEnabled
 		ifTrue: [ self
 				logMessage: aMessage
@@ -98,12 +98,12 @@ EDACTLogging classSide >> logInfoMessage: aMessage beautify: aBoolean [
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> logMessage: aMessage inCategory: aString inStream: aStream [
+EDACLogging classSide >> logMessage: aMessage inCategory: aString inStream: aStream [
 	^ self logMessage: aMessage inCategory: aString inStream: aStream beautify: self beautifyByDefault 
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> logMessage: aMessage inCategory: aString inStream: aStream beautify: beautify [
+EDACLogging classSide >> logMessage: aMessage inCategory: aString inStream: aStream beautify: beautify [
 	| timestamp stream |
 	stream := WriteStream on: String new.
 	beautify
@@ -130,12 +130,12 @@ EDACTLogging classSide >> logMessage: aMessage inCategory: aString inStream: aSt
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> logTraceMessage: aMessage [
+EDACLogging classSide >> logTraceMessage: aMessage [
 	^ self logTraceMessage: aMessage beautify: self beautifyByDefault 
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> logTraceMessage: aMessage beautify: aBoolean [
+EDACLogging classSide >> logTraceMessage: aMessage beautify: aBoolean [
 	EDACLoggingSettings traceEnabled
 		ifTrue: [ self
 				logMessage: aMessage
@@ -145,12 +145,12 @@ EDACTLogging classSide >> logTraceMessage: aMessage beautify: aBoolean [
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> logWarningMessage: aMessage [
+EDACLogging classSide >> logWarningMessage: aMessage [
 	^ self logWarningMessage: aMessage beautify: self beautifyByDefault
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> logWarningMessage: aMessage beautify: aBoolean [
+EDACLogging classSide >> logWarningMessage: aMessage beautify: aBoolean [
 	^ EDACLoggingSettings warningEnabled
 		ifTrue: [ self
 				logMessage: aMessage
@@ -160,7 +160,7 @@ EDACTLogging classSide >> logWarningMessage: aMessage beautify: aBoolean [
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> nextPut: aCharacter [
+EDACLogging classSide >> nextPut: aCharacter [
 	| result |
 	result := self defaultStream.
 	result nextPut: aCharacter.
@@ -168,7 +168,7 @@ EDACTLogging classSide >> nextPut: aCharacter [
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> nextPutAll: aString [
+EDACLogging classSide >> nextPutAll: aString [
 	| result |
 	result := self defaultStream.
 	result nextPutAll: aString.
@@ -176,7 +176,7 @@ EDACTLogging classSide >> nextPutAll: aString [
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> print: aString [
+EDACLogging classSide >> print: aString [
 	| result |
 	result := self defaultStream.
 	result print: aString.
@@ -184,86 +184,86 @@ EDACTLogging classSide >> print: aString [
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> stderr [
+EDACLogging classSide >> stderr [
 	^ Stdio stderr
 ]
 
 { #category : #logging }
-EDACTLogging classSide >> stdout [
+EDACLogging classSide >> stdout [
 	^ Stdio stdout
 ]
 
 { #category : #logging }
-EDACTLogging >> logDebugMessage: aMessage [
+EDACLogging >> logDebugMessage: aMessage [
 	^ self class logDebugMessage: aMessage
 ]
 
 { #category : #logging }
-EDACTLogging >> logDebugMessage: aMessage beautify: aBoolean [
+EDACLogging >> logDebugMessage: aMessage beautify: aBoolean [
 	^ self class logDebugMessage: aMessage beautify: aBoolean
 ]
 
 { #category : #logging }
-EDACTLogging >> logErrorMessage: aMessage [
+EDACLogging >> logErrorMessage: aMessage [
 	^ self class logErrorMessage: aMessage
 ]
 
 { #category : #logging }
-EDACTLogging >> logErrorMessage: aMessage andThrow: anExceptionClass [
+EDACLogging >> logErrorMessage: aMessage andThrow: anExceptionClass [
 	^ self class logErrorMessage: aMessage andThrow: anExceptionClass
 ]
 
 { #category : #logging }
-EDACTLogging >> logErrorMessage: aMessage beautify: aBoolean [
+EDACLogging >> logErrorMessage: aMessage beautify: aBoolean [
 	^ self class logErrorMessage: aMessage beautify: aBoolean
 ]
 
 { #category : #logging }
-EDACTLogging >> logErrorMessage: aMessage beautify: aBoolean andThrow: anExceptionClass [
+EDACLogging >> logErrorMessage: aMessage beautify: aBoolean andThrow: anExceptionClass [
 	^ self class logErrorMessage: aMessage beautify: aBoolean andThrow: anExceptionClass
 ]
 
 { #category : #logging }
-EDACTLogging >> logInfoMessage: aMessage [
+EDACLogging >> logInfoMessage: aMessage [
 	^ self class logInfoMessage: aMessage
 ]
 
 { #category : #logging }
-EDACTLogging >> logInfoMessage: aMessage beautify: aBoolean [
+EDACLogging >> logInfoMessage: aMessage beautify: aBoolean [
 	^ self class logInfoMessage: aMessage beautify: aBoolean
 ]
 
 { #category : #logging }
-EDACTLogging >> logTraceMessage: aMessage [
+EDACLogging >> logTraceMessage: aMessage [
 	^ self class logTraceMessage: aMessage
 ]
 
 { #category : #logging }
-EDACTLogging >> logTraceMessage: aMessage beautify: aBoolean [
+EDACLogging >> logTraceMessage: aMessage beautify: aBoolean [
 	^ self class logTraceMessage: aMessage beautify: aBoolean
 ]
 
 { #category : #logging }
-EDACTLogging >> logWarningMessage: aMessage [
+EDACLogging >> logWarningMessage: aMessage [
 	^ self class logWarningMessage: aMessage
 ]
 
 { #category : #logging }
-EDACTLogging >> logWarningMessage: aMessage beautify: aBoolean [
+EDACLogging >> logWarningMessage: aMessage beautify: aBoolean [
 	^ self class logWarningMessage: aMessage beautify: aBoolean
 ]
 
 { #category : #logging }
-EDACTLogging >> nextPut: aCharacter [
+EDACLogging >> nextPut: aCharacter [
 	^ self class nextPut: aCharacter
 ]
 
 { #category : #logging }
-EDACTLogging >> nextPutAll: aString [
+EDACLogging >> nextPutAll: aString [
 	^ self class nextPutAll: aString
 ]
 
 { #category : #logging }
-EDACTLogging >> print: aString [
+EDACLogging >> print: aString [
 	^ self class print: aString
 ]

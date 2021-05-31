@@ -1,11 +1,12 @@
 Trait {
-	#name : #EDACTSourceCodeHelper,
-	#traits : 'EDACTLanguageHelper + EDACTCollectionHelper',
+	#name : #EDACSourceCodeHelper,
+	#traits : 'EDACLanguageHelper + EDACCollectionHelper',
+	#classTraits : 'EDACLanguageHelper classTrait + EDACCollectionHelper classTrait',
 	#category : #'EDAC-Traits'
 }
 
 { #category : #helper }
-EDACTSourceCodeHelper >> allAttributesOf: cls [
+EDACSourceCodeHelper >> allAttributesOf: cls [
 	| result |
 	result := OrderedCollection new.
 	result addAll: cls instVarNames.
@@ -13,7 +14,7 @@ EDACTSourceCodeHelper >> allAttributesOf: cls [
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> allAttributesOf: cls including: attributes [
+EDACSourceCodeHelper >> allAttributesOf: cls including: attributes [
 	| result |
 	result := OrderedCollection withAll: attributes.
 	result addAll: cls instVarNames.
@@ -21,7 +22,7 @@ EDACTSourceCodeHelper >> allAttributesOf: cls including: attributes [
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> asPharoSourceCode: anAttributeValue [
+EDACSourceCodeHelper >> asPharoSourceCode: anAttributeValue [
 	| result cr |
 	cr := String with: Character cr.
 	(anAttributeValue isKindOf: Array)
@@ -48,12 +49,12 @@ EDACTSourceCodeHelper >> asPharoSourceCode: anAttributeValue [
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> camelCaseToDotSeparated: aString [
+EDACSourceCodeHelper >> camelCaseToDotSeparated: aString [
    ^ self separateCamelCase: aString with: '.'
 ]
 
 { #category : #compilation }
-EDACTSourceCodeHelper >> checkBytecodeHash: methodName sourceCode: method inClass: aClass [
+EDACSourceCodeHelper >> checkBytecodeHash: methodName sourceCode: method inClass: aClass [
 	| existingClass existingMethod result |
 	self flag: #TODO. "Two methods with different comments generate different bytecodes for some reason"
 	existingClass := (self class environment at: aClass name asSymbol ifAbsent: nil).
@@ -74,22 +75,22 @@ EDACTSourceCodeHelper >> checkBytecodeHash: methodName sourceCode: method inClas
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> classExists: className [
+EDACSourceCodeHelper >> classExists: className [
 	^ Smalltalk hasClassNamed: className asSymbol
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> commandNameFor: anEventName [
+EDACSourceCodeHelper >> commandNameFor: anEventName [
 	^ self commandNameFor: anEventName withSeparator: '.'
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> commandNameFor: aCommandName usingCommandNameResolver: aCommandNameResolver [
+EDACSourceCodeHelper >> commandNameFor: aCommandName usingCommandNameResolver: aCommandNameResolver [
 	^ aCommandNameResolver resolve: aCommandName
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> commandNameFor: anEventName withSeparator: separator [
+EDACSourceCodeHelper >> commandNameFor: anEventName withSeparator: separator [
 	| result aux |
 	result := nil.
 	aux := anEventName allRegexMatches: '([^' , separator , ']*)'.
@@ -109,7 +110,7 @@ EDACTSourceCodeHelper >> commandNameFor: anEventName withSeparator: separator [
 ]
 
 { #category : #compilation }
-EDACTSourceCodeHelper >> compile: methodName sourceCode: method inClass: aClass classifiedAs: protocol [
+EDACSourceCodeHelper >> compile: methodName sourceCode: method inClass: aClass classifiedAs: protocol [
 	| compile |
 	self flag: #TODO. "Disabled checkBytecodeHash:sourceCode:inClass: since it doesn't help figuring out if a method changes only by a signature timestamp"
 	compile := (self isMethod: methodName markedAsDisableRegenerationInClass: aClass) not.
@@ -125,7 +126,7 @@ EDACTSourceCodeHelper >> compile: methodName sourceCode: method inClass: aClass 
 ]
 
 { #category : #compilation }
-EDACTSourceCodeHelper >> compileIfDoesNotExist: methodName sourceCode: method inClass: aClass classifiedAs: protocol [
+EDACSourceCodeHelper >> compileIfDoesNotExist: methodName sourceCode: method inClass: aClass classifiedAs: protocol [
 	aClass methodDictionary
 		at: methodName asSymbol
 		ifAbsent: [ self
@@ -136,28 +137,28 @@ EDACTSourceCodeHelper >> compileIfDoesNotExist: methodName sourceCode: method in
 ]
 
 { #category : #'compilation-support' }
-EDACTSourceCodeHelper >> containsAnyDisableRegenerationMethod: aClass [
+EDACSourceCodeHelper >> containsAnyDisableRegenerationMethod: aClass [
 	^ (self retrieveDisableRegenerationPragmas: aClass) isNotEmpty
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> cr [
+EDACSourceCodeHelper >> cr [
 	^ Character cr
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> dotSeparatedToCamelCase: aString [
+EDACSourceCodeHelper >> dotSeparatedToCamelCase: aString [
 	^ self toCamelCase: aString usingSeparator: '\.'
 
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> eventNameFor: aCommandName usingEventNameResolver: anEventNameResolver [
+EDACSourceCodeHelper >> eventNameFor: aCommandName usingEventNameResolver: anEventNameResolver [
 	^ anEventNameResolver resolve: aCommandName
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> generateSignature [
+EDACSourceCodeHelper >> generateSignature [
 	| fromCommand file |
 	self flag: #TODO. "Disabled since it generates conflicts in git, and checkBytecodeHash:sourceCode:inClass: is not useful for figuring out if the method actually changes."
 	fromCommand := self commandFile isNotNil.
@@ -170,46 +171,46 @@ EDACTSourceCodeHelper >> generateSignature [
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> generatedProtocolFor: aNumber [
+EDACSourceCodeHelper >> generatedProtocolFor: aNumber [
 	| result |
 	result := (aNumber ifNil: [ 'generated' ] ifNotNil: [ 'generated-v' , aNumber greaseString ]) asSymbol.
 	^ result
 ]
 
 { #category : #'compilation-support' }
-EDACTSourceCodeHelper >> isMethod: aMethodName markedAsDisableRegenerationInClass: aClass [
+EDACSourceCodeHelper >> isMethod: aMethodName markedAsDisableRegenerationInClass: aClass [
 	^ (aClass methodDictionary at: aMethodName asSymbol ifAbsent: [ ^ false ]) hasPragmaNamed: 'disable_regeneration'
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> normalize: aString [
+EDACSourceCodeHelper >> normalize: aString [
 	^ (self replace: '\W' with: '_' inString: aString trimmed) asLowercase
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> remove: prefix fromBeginningOf: aString [
+EDACSourceCodeHelper >> remove: prefix fromBeginningOf: aString [
 	| result |
 	result := (aString beginsWith: prefix) ifTrue: [ aString copyReplaceFrom: 1 to: prefix size with: '' ] ifFalse: [ aString ].
 	^ result
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> removeClassLiteralFromMetaClassName: aString [
+EDACSourceCodeHelper >> removeClassLiteralFromMetaClassName: aString [
 	^ ' class$' asRegexIgnoringCase copy: aString replacingMatchesWith: ''
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> removeSuffix: suffix fromFileName: aFile [
+EDACSourceCodeHelper >> removeSuffix: suffix fromFileName: aFile [
 	^ aFile basename copyWithRegex: (suffix copyWithRegex: '\.' matchesReplacedWith: '\.') , '$' matchesReplacedWith: ''
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> replace: match with: replacement inString: aString [
+EDACSourceCodeHelper >> replace: match with: replacement inString: aString [
 	^ match asRegexIgnoringCase copy: aString replacingMatchesWith: replacement
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> retrieveAggregateFromAggregateKey: json [
+EDACSourceCodeHelper >> retrieveAggregateFromAggregateKey: json [
 	| result aux |
 	aux := (json at: #meta) at: #aggregate ifAbsent: [ nil ].
 	result := aux ifNil: [ nil ] ifNotNil: [ :arg | aux asCamelCase ].
@@ -217,7 +218,7 @@ EDACTSourceCodeHelper >> retrieveAggregateFromAggregateKey: json [
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> retrieveAggregateFromCommandType: json [
+EDACSourceCodeHelper >> retrieveAggregateFromCommandType: json [
 	| result type aux |
 	result := nil.
 	aux := (json at: #meta) at: #type ifAbsent: [ nil ].
@@ -232,13 +233,13 @@ EDACTSourceCodeHelper >> retrieveAggregateFromCommandType: json [
 ]
 
 { #category : #'compilation-support' }
-EDACTSourceCodeHelper >> retrieveDisableRegenerationPragmas: aClass [
+EDACSourceCodeHelper >> retrieveDisableRegenerationPragmas: aClass [
 	^ self retrieveMethodsInClass: aClass withPragma: 'disable_regeneration'
 
 ]
 
 { #category : #'compilation-support' }
-EDACTSourceCodeHelper >> retrieveMethodsInClass: aClass withPragma: aPragma [
+EDACSourceCodeHelper >> retrieveMethodsInClass: aClass withPragma: aPragma [
 	(self classExists: aClass asSymbol)
 		ifTrue: [ ^ (Pragma
 				allNamed: aPragma
@@ -247,17 +248,17 @@ EDACTSourceCodeHelper >> retrieveMethodsInClass: aClass withPragma: aPragma [
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> separateCamelCase: aString with: aSeparator [
+EDACSourceCodeHelper >> separateCamelCase: aString with: aSeparator [
    ^ (aString copyWithRegex: '[A-Z]' matchesTranslatedUsing: [ :each | aSeparator , each asLowercase  ]) allButFirst 
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> toCamelCase: aString [
+EDACSourceCodeHelper >> toCamelCase: aString [
 	^ self underscoreSeparatedToCamelCase: aString asCamelCase 
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> toCamelCase: aString usingSeparator: separator [
+EDACSourceCodeHelper >> toCamelCase: aString usingSeparator: separator [
 	| aux result |
 	aux := separator asRegexIgnoringCase copy: aString replacingMatchesWith: ' '.
 	result := aux = aux asUppercase 
@@ -267,13 +268,13 @@ EDACTSourceCodeHelper >> toCamelCase: aString usingSeparator: separator [
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> underscoreSeparatedToCamelCase: aString [
+EDACSourceCodeHelper >> underscoreSeparatedToCamelCase: aString [
 	^ self toCamelCase: aString usingSeparator: '_'
 
 ]
 
 { #category : #helper }
-EDACTSourceCodeHelper >> upcasedToDotSeparated: aString [
+EDACSourceCodeHelper >> upcasedToDotSeparated: aString [
 	| aux |
 	aux := '_' asRegexIgnoringCase copy: aString replacingMatchesWith: '.'.
 	^ aux asLowercase

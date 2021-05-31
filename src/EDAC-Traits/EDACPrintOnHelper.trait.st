@@ -1,10 +1,10 @@
 Trait {
-	#name : #EDACTPrintOnHelper,
+	#name : #EDACPrintOnHelper,
 	#category : #'EDAC-Traits'
 }
 
 { #category : #helpers }
-EDACTPrintOnHelper >> printOn: stream [
+EDACPrintOnHelper >> printOn: stream [
 	| firstVar |
 	firstVar := true.
 	self class allInstVarNames

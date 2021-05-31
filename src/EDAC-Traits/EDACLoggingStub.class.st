@@ -16,8 +16,8 @@ logToStdout
 Class {
 	#name : #EDACLoggingStub,
 	#superclass : #Object,
-	#traits : 'EDACTLogging',
-	#classTraits : 'EDACTLogging classTrait',
+	#traits : 'EDACLogging',
+	#classTraits : 'EDACLogging classTrait',
 	#category : #'EDAC-Traits'
 }
 

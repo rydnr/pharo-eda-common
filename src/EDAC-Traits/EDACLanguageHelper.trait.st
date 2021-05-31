@@ -1,10 +1,10 @@
 Trait {
-	#name : #EDACTLanguageHelper,
+	#name : #EDACLanguageHelper,
 	#category : #'EDAC-Traits'
 }
 
 { #category : #helper }
-EDACTLanguageHelper classSide >> irregularPastTenses: aVerb [
+EDACLanguageHelper classSide >> irregularPastTenses: aVerb [
 	| result dict |
 	dict := {('build' -> 'built').
 	('send' -> 'sent').
@@ -18,7 +18,7 @@ EDACTLanguageHelper classSide >> irregularPastTenses: aVerb [
 ]
 
 { #category : #helper }
-EDACTLanguageHelper classSide >> irregularPluralFormFor: aNoun [
+EDACLanguageHelper classSide >> irregularPluralFormFor: aNoun [
 	| mapping |
 	mapping := Dictionary new.
 	mapping at: 'bus' put: 'buses'.
@@ -27,7 +27,7 @@ EDACTLanguageHelper classSide >> irregularPluralFormFor: aNoun [
 ]
 
 { #category : #helper }
-EDACTLanguageHelper classSide >> irregularPresentTenses: aVerb [
+EDACLanguageHelper classSide >> irregularPresentTenses: aVerb [
 	| result dict |
 	dict := {('built' -> 'build').
 	('sent' -> 'send').
@@ -41,7 +41,7 @@ EDACTLanguageHelper classSide >> irregularPresentTenses: aVerb [
 ]
 
 { #category : #helper }
-EDACTLanguageHelper classSide >> irregularSingularFormFor: aNoun [
+EDACLanguageHelper classSide >> irregularSingularFormFor: aNoun [
 	| mapping |
 	mapping := Dictionary new.
 	mapping at: 'buses' put: 'bus'.
@@ -50,7 +50,7 @@ EDACTLanguageHelper classSide >> irregularSingularFormFor: aNoun [
 ]
 
 { #category : #helper }
-EDACTLanguageHelper classSide >> nounInPlural: aNoun [
+EDACLanguageHelper classSide >> nounInPlural: aNoun [
 	| result |
 	result := self irregularPluralFormFor: aNoun.
 	result
@@ -69,7 +69,7 @@ EDACTLanguageHelper classSide >> nounInPlural: aNoun [
 ]
 
 { #category : #helper }
-EDACTLanguageHelper classSide >> nounInSingular: aNoun [
+EDACLanguageHelper classSide >> nounInSingular: aNoun [
 	| result |
 	result := self irregularSingularFormFor: aNoun.
 	result
@@ -88,17 +88,17 @@ EDACTLanguageHelper classSide >> nounInSingular: aNoun [
 ]
 
 { #category : #removing }
-EDACTLanguageHelper classSide >> removePrefix: prefix from: value [
+EDACLanguageHelper classSide >> removePrefix: prefix from: value [
 	^ ('^' , prefix copyReplaceAll: ':' with: '\:') asRegexIgnoringCase copy: value replacingMatchesWith: ''
 ]
 
 { #category : #removing }
-EDACTLanguageHelper classSide >> removeSuffix: suffix from: value [
+EDACLanguageHelper classSide >> removeSuffix: suffix from: value [
 	^ ((suffix copyReplaceAll: ':' with: '\:') , '$') asRegexIgnoringCase copy: value replacingMatchesWith: ''
 ]
 
 { #category : #helper }
-EDACTLanguageHelper classSide >> verbInPastTense: aVerb [
+EDACLanguageHelper classSide >> verbInPastTense: aVerb [
 	| result |
 	result := self irregularPastTenses: aVerb.
 	result
@@ -113,7 +113,7 @@ EDACTLanguageHelper classSide >> verbInPastTense: aVerb [
 ]
 
 { #category : #helper }
-EDACTLanguageHelper classSide >> verbInPresentTense: aVerb [
+EDACLanguageHelper classSide >> verbInPresentTense: aVerb [
 	| result |
 	result := self irregularPresentTenses: aVerb.
 	result
@@ -128,60 +128,60 @@ EDACTLanguageHelper classSide >> verbInPresentTense: aVerb [
 ]
 
 { #category : #helper }
-EDACTLanguageHelper >> irregularPastTenses: aVerb [
+EDACLanguageHelper >> irregularPastTenses: aVerb [
 	^ self class irregularPastTenses: aVerb
 ]
 
 { #category : #helper }
-EDACTLanguageHelper >> irregularPluralFormFor: aNoun [
+EDACLanguageHelper >> irregularPluralFormFor: aNoun [
 	^ self class irregularPluralFormFor: aNoun
 	
 ]
 
 { #category : #helper }
-EDACTLanguageHelper >> irregularPresentTenses: aVerb [
+EDACLanguageHelper >> irregularPresentTenses: aVerb [
 	^ self class irregularPresentTenses: aVerb
 
 ]
 
 { #category : #helper }
-EDACTLanguageHelper >> irregularSingularFormFor: aNoun [
+EDACLanguageHelper >> irregularSingularFormFor: aNoun [
 	^ self class irregularSingularFormFor: aNoun
 
 ]
 
 { #category : #helper }
-EDACTLanguageHelper >> nounInPlural: aNoun [
+EDACLanguageHelper >> nounInPlural: aNoun [
 	^ self class nounInPlural: aNoun
 
 ]
 
 { #category : #helper }
-EDACTLanguageHelper >> nounInSingular: aNoun [
+EDACLanguageHelper >> nounInSingular: aNoun [
 	^ self class nounInSingular: aNoun
 
 ]
 
 { #category : #helper }
-EDACTLanguageHelper >> removePrefix: prefix from: value [
+EDACLanguageHelper >> removePrefix: prefix from: value [
 	^ self class removePrefix: prefix from: value
 
 ]
 
 { #category : #helper }
-EDACTLanguageHelper >> removeSuffix: suffix from: value [
+EDACLanguageHelper >> removeSuffix: suffix from: value [
 	^ self class removeSuffix: suffix from: value
 
 ]
 
 { #category : #helper }
-EDACTLanguageHelper >> verbInPastTense: aVerb [
+EDACLanguageHelper >> verbInPastTense: aVerb [
 	^ self class verbInPastTense: aVerb
 
 ]
 
 { #category : #helper }
-EDACTLanguageHelper >> verbInPresentTense: aVerb [
+EDACLanguageHelper >> verbInPresentTense: aVerb [
 	^ self class verbInPresentTense: aVerb
 
 ]

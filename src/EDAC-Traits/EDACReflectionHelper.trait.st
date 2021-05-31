@@ -21,16 +21,16 @@ It relies upon Class >> methodDict.
 
 "
 Trait {
-	#name : #EDACTReflectionHelper,
+	#name : #EDACReflectionHelper,
 	#category : #'EDAC-Traits'
 }
 
 { #category : #helpers }
-EDACTReflectionHelper classSide >> doesInstance: anInstance understand: aString [
+EDACReflectionHelper classSide >> doesInstance: anInstance understand: aString [
 	^ anInstance respondsTo: aString
 ]
 
 { #category : #helpers }
-EDACTReflectionHelper >> doesInstance: anInstance understand: aString [
+EDACReflectionHelper >> doesInstance: anInstance understand: aString [
 	^ self class doesInstance: anInstance understand: aString
 ]

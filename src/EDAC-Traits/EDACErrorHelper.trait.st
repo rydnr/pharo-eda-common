@@ -19,19 +19,19 @@ Public API and Key Messages:
 - manageError:whenProjectingEvent:usingErrorStrategy:: When a projection-related error is captured, it delegates the error handling to the error strategy.
 "
 Trait {
-	#name : #EDACTErrorHelper,
-	#traits : 'EDACTLogging',
-	#classTraits : 'EDACTLogging classTrait',
+	#name : #EDACErrorHelper,
+	#traits : 'EDACLogging',
+	#classTraits : 'EDACLogging classTrait',
 	#category : #'EDAC-Traits'
 }
 
 { #category : #helpers }
-EDACTErrorHelper classSide >> basename [
+EDACErrorHelper classSide >> basename [
 	^ Time now yyyyMMddhhmmss24
 ]
 
 { #category : #helpers }
-EDACTErrorHelper classSide >> errorFolderFor: basename [
+EDACErrorHelper classSide >> errorFolderFor: basename [
 	| parent result |
 	parent := FileSystem workingDirectory / 'errors'.
 	parent createDirectory.
@@ -41,7 +41,7 @@ EDACTErrorHelper classSide >> errorFolderFor: basename [
 ]
 
 { #category : #logging }
-EDACTErrorHelper classSide >> logDebugMessage: aMessage beautify: aBoolean [
+EDACErrorHelper classSide >> logDebugMessage: aMessage beautify: aBoolean [
 	EDACLoggingSettings debugEnabled
 		ifTrue: [ self
 				logMessage: aMessage
@@ -51,7 +51,7 @@ EDACTErrorHelper classSide >> logDebugMessage: aMessage beautify: aBoolean [
 ]
 
 { #category : #logging }
-EDACTErrorHelper classSide >> logErrorMessage: aMessage beautify: aBoolean [
+EDACErrorHelper classSide >> logErrorMessage: aMessage beautify: aBoolean [
 	EDACLoggingSettings errorEnabled
 		ifTrue: [ self
 				logMessage: aMessage
@@ -61,7 +61,7 @@ EDACTErrorHelper classSide >> logErrorMessage: aMessage beautify: aBoolean [
 ]
 
 { #category : #logging }
-EDACTErrorHelper classSide >> logInfoMessage: aMessage beautify: aBoolean [
+EDACErrorHelper classSide >> logInfoMessage: aMessage beautify: aBoolean [
 	EDACLoggingSettings infoEnabled
 		ifTrue: [ self
 				logMessage: aMessage
@@ -71,7 +71,7 @@ EDACTErrorHelper classSide >> logInfoMessage: aMessage beautify: aBoolean [
 ]
 
 { #category : #logging }
-EDACTErrorHelper classSide >> logTraceMessage: aMessage beautify: aBoolean [
+EDACErrorHelper classSide >> logTraceMessage: aMessage beautify: aBoolean [
 	EDACLoggingSettings traceEnabled
 		ifTrue: [ self
 				logMessage: aMessage
@@ -81,7 +81,7 @@ EDACTErrorHelper classSide >> logTraceMessage: aMessage beautify: aBoolean [
 ]
 
 { #category : #logging }
-EDACTErrorHelper classSide >> logWarningMessage: aMessage beautify: aBoolean [
+EDACErrorHelper classSide >> logWarningMessage: aMessage beautify: aBoolean [
 	^ EDACLoggingSettings warningEnabled
 		ifTrue: [ self
 				logMessage: aMessage
@@ -91,7 +91,7 @@ EDACTErrorHelper classSide >> logWarningMessage: aMessage beautify: aBoolean [
 ]
 
 { #category : #handling }
-EDACTErrorHelper >> manageError: anException forCommand: aCommand usingErrorStrategy: aStrategy [
+EDACErrorHelper >> manageError: anException forCommand: aCommand usingErrorStrategy: aStrategy [
 	| errorHandler result context basename dictionary |
 	errorHandler := (self class environment at: aStrategy asSymbol) new.
 	errorHandler class shouldPersistFuel
@@ -116,7 +116,7 @@ EDACTErrorHelper >> manageError: anException forCommand: aCommand usingErrorStra
 ]
 
 { #category : #handling }
-EDACTErrorHelper >> manageError: anException forMessage: aString usingErrorStrategy: aStrategy [
+EDACErrorHelper >> manageError: anException forMessage: aString usingErrorStrategy: aStrategy [
 	| errorHandler result context basename dictionary |
 	self
 		logErrorMessage:
@@ -139,7 +139,7 @@ EDACTErrorHelper >> manageError: anException forMessage: aString usingErrorStrat
 ]
 
 { #category : #handling }
-EDACTErrorHelper >> manageError: anException usingErrorStrategy: aStrategy [
+EDACErrorHelper >> manageError: anException usingErrorStrategy: aStrategy [
 	| errorHandler result context basename |
 	self
 		logErrorMessage: 'Error detected: ' , anException description printString.
@@ -158,7 +158,7 @@ EDACTErrorHelper >> manageError: anException usingErrorStrategy: aStrategy [
 ]
 
 { #category : #handling }
-EDACTErrorHelper >> manageError: anException whenProjectingEvent: anEvent usingErrorStrategy: aStrategy [
+EDACErrorHelper >> manageError: anException whenProjectingEvent: anEvent usingErrorStrategy: aStrategy [
 	| errorHandler result context basename dictionary |
 	self
 		logErrorMessage:
@@ -184,7 +184,7 @@ EDACTErrorHelper >> manageError: anException whenProjectingEvent: anEvent usingE
 ]
 
 { #category : #handling }
-EDACTErrorHelper >> writeCommand: aCommand withBasename: aBasename [
+EDACErrorHelper >> writeCommand: aCommand withBasename: aBasename [
 	| result |
 	result := (self class errorFolderFor: aBasename)
 		/ (aCommand class printString , '.txt').
@@ -195,7 +195,7 @@ EDACTErrorHelper >> writeCommand: aCommand withBasename: aBasename [
 ]
 
 { #category : #handling }
-EDACTErrorHelper >> writeEvent: aString withBasename: aBasename [
+EDACErrorHelper >> writeEvent: aString withBasename: aBasename [
 	| result |
 	result := (self class errorFolderFor: aBasename) / 'event.txt'.
 	result writeStream
@@ -205,17 +205,17 @@ EDACTErrorHelper >> writeEvent: aString withBasename: aBasename [
 ]
 
 { #category : #handling }
-EDACTErrorHelper >> writeFuelContext: aContext named: aString withBasename: aBasename [
+EDACErrorHelper >> writeFuelContext: aContext named: aString withBasename: aBasename [
 	| parentFolder |
 	parentFolder := self class errorFolderFor: aBasename.
-	^ EDAFuelHelper new
+	^ EDATFuelHelper new
 		writeFuelContext: aContext
 		named: 'session.fuel'
 		inFolder: parentFolder
 ]
 
 { #category : #handling }
-EDACTErrorHelper >> writeMessage: aString withBasename: aBasename [
+EDACErrorHelper >> writeMessage: aString withBasename: aBasename [
 	| result |
 	result := (self class errorFolderFor: aBasename) / 'message.txt'.
 	result writeStream

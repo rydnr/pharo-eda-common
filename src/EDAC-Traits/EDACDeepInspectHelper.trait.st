@@ -1,25 +1,25 @@
 Trait {
-	#name : #EDACTDeepInspectHelper,
+	#name : #EDACDeepInspectHelper,
 	#category : #'EDAC-Traits'
 }
 
 { #category : #comparing }
-EDACTDeepInspectHelper >> areArrayOrCollectionBoth: firstVar and: secondVar [
+EDACDeepInspectHelper >> areArrayOrCollectionBoth: firstVar and: secondVar [
 	^ (self isArrayOrCollection: firstVar) and: [ self isArrayOrCollection: secondVar ]
 ]
 
 { #category : #comparing }
-EDACTDeepInspectHelper >> areDictionariesBoth: firstVar and: secondVar [
+EDACDeepInspectHelper >> areDictionariesBoth: firstVar and: secondVar [
 	^ (self isDictionary: firstVar) and: [ self isDictionary: secondVar ]
 ]
 
 { #category : #comparing }
-EDACTDeepInspectHelper >> deepEquals: anInstance [
+EDACDeepInspectHelper >> deepEquals: anInstance [
 	^ self deepEquals: self with: anInstance
 ]
 
 { #category : #comparing }
-EDACTDeepInspectHelper >> deepEquals: anInstance with: anotherInstance [
+EDACDeepInspectHelper >> deepEquals: anInstance with: anotherInstance [
 	| result |
 	(self areArrayOrCollectionBoth: anInstance and: anotherInstance) ifTrue: [
 		result := self deepEqualsArrayOrCollection: anInstance with: anotherInstance
@@ -58,7 +58,7 @@ EDACTDeepInspectHelper >> deepEquals: anInstance with: anotherInstance [
 ]
 
 { #category : #comparing }
-EDACTDeepInspectHelper >> deepEqualsArrayOrCollection: anArrayOrCollection with: anotherArrayOrCollection [
+EDACDeepInspectHelper >> deepEqualsArrayOrCollection: anArrayOrCollection with: anotherArrayOrCollection [
 	^ (self sizeIsEqualExcludingNils: anArrayOrCollection with: anotherArrayOrCollection)
 		and: [ | first second aux |
 			first := anArrayOrCollection reject: [ :v | v isNil ].
@@ -77,7 +77,7 @@ EDACTDeepInspectHelper >> deepEqualsArrayOrCollection: anArrayOrCollection with:
 ]
 
 { #category : #comparing }
-EDACTDeepInspectHelper >> deepEqualsDictionary: aDict with: anotherDict [
+EDACDeepInspectHelper >> deepEqualsDictionary: aDict with: anotherDict [
 	^ (aDict size = anotherDict size)
 		and: [
 			(aDict keys reject: [ :k |
@@ -87,18 +87,18 @@ EDACTDeepInspectHelper >> deepEqualsDictionary: aDict with: anotherDict [
 ]
 
 { #category : #comparing }
-EDACTDeepInspectHelper >> isArrayOrCollection: aVar [
+EDACDeepInspectHelper >> isArrayOrCollection: aVar [
 	^ (aVar class = Array) or: [ aVar isKindOf: OrderedCollection ]
 
 ]
 
 { #category : #comparing }
-EDACTDeepInspectHelper >> isDictionary: aVar [
+EDACDeepInspectHelper >> isDictionary: aVar [
 	^ aVar class = Dictionary
 ]
 
 { #category : #comparing }
-EDACTDeepInspectHelper >> sizeIsEqualExcludingNils: anArrayOrCollection with: anotherArrayOrCollection [
+EDACDeepInspectHelper >> sizeIsEqualExcludingNils: anArrayOrCollection with: anotherArrayOrCollection [
 	^ (anArrayOrCollection size = anotherArrayOrCollection size)
 		or: [   (anArrayOrCollection reject: [ :v | v isNil ]) size
 				= (anotherArrayOrCollection reject: [ :v | v isNil ]) size ]

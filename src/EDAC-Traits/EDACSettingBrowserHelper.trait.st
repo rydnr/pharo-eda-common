@@ -1,16 +1,16 @@
 Trait {
-	#name : #EDACTSettingBrowserHelper,
+	#name : #EDACSettingBrowserHelper,
 	#category : #'EDAC-Traits'
 }
 
 { #category : #helper }
-EDACTSettingBrowserHelper classSide >> refreshSettingBrowsers [
+EDACSettingBrowserHelper classSide >> refreshSettingBrowsers [
 	self currentWorld submorphs
 		select: [ :w | w model class = SettingBrowser ]
 		thenCollect: [ :w | w delete. SettingBrowser open ]
 ]
 
 { #category : #helper }
-EDACTSettingBrowserHelper >> refreshSettingBrowsers [
+EDACSettingBrowserHelper >> refreshSettingBrowsers [
 	self class refreshSettingBrowsers
 ]
