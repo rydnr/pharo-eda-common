@@ -21,6 +21,7 @@ Public API and Key Messages:
 Trait {
 	#name : #EDACTErrorHelper,
 	#traits : 'EDACTLogging',
+	#classTraits : 'EDACTLogging classTrait',
 	#category : #'EDAC-Traits'
 }
 
@@ -96,13 +97,13 @@ EDACTErrorHelper >> manageError: anException forCommand: aCommand usingErrorStra
 	errorHandler class shouldPersistFuel
 		ifTrue: [ self
 				logErrorMessage:
-					'Error processing ' , aCommand greaseString , ': '
-						, anException description greaseString.
+					'Error processing ' , aCommand printString , ': '
+						, anException description printString.
 			context := thisContext clone.
 			basename := self class basename.
 			self
 				writeFuelContext: context
-				named: anException class greaseString
+				named: anException class printString
 				withBasename: basename.
 			self writeCommand: aCommand withBasename: basename ].
 	errorHandler context: context.
@@ -119,15 +120,15 @@ EDACTErrorHelper >> manageError: anException forMessage: aString usingErrorStrat
 	| errorHandler result context basename dictionary |
 	self
 		logErrorMessage:
-			'Error processing ' , aString greaseString , ': '
-				, anException description greaseString.
+			'Error processing ' , aString printString , ': '
+				, anException description printString.
 	dictionary := Dictionary new.
 	dictionary at: #message put: aString.
 	context := thisContext clone.
 	basename := self class basename.
 	self
 		writeFuelContext: context
-		named: anException class greaseString withBasename: basename.
+		named: anException class printString withBasename: basename.
 	self writeMessage: aString withBasename: basename.
 	errorHandler := (self class environment at: aStrategy asSymbol) new
 		context: context.
@@ -141,12 +142,12 @@ EDACTErrorHelper >> manageError: anException forMessage: aString usingErrorStrat
 EDACTErrorHelper >> manageError: anException usingErrorStrategy: aStrategy [
 	| errorHandler result context basename |
 	self
-		logErrorMessage: 'Error detected: ' , anException description greaseString.
+		logErrorMessage: 'Error detected: ' , anException description printString.
 	basename := DateAndTime now asYYYYmmddHMS.
 	context := thisContext clone.
 	self
 		writeFuelContext: context
-		named: anException class greaseString
+		named: anException class printString
 		withBasename: basename.
 	errorHandler := (self class environment at: aStrategy asSymbol) new
 		context: context.
@@ -161,17 +162,17 @@ EDACTErrorHelper >> manageError: anException whenProjectingEvent: anEvent usingE
 	| errorHandler result context basename dictionary |
 	self
 		logErrorMessage:
-			'Error projecting ' , anEvent greaseString , ': '
-				, anException description greaseString.
+			'Error projecting ' , anEvent printString , ': '
+				, anException description printString.
 	context := thisContext clone.
 	basename := self class basename.
 	self
 		writeFuelContext: context
 		named:
-			anException class greaseString , '-' , anEvent class greaseString
+			anException class printString , '-' , anEvent class printString
 				, '.txt'
 		withBasename: basename.
-	self writeEvent: anEvent greaseString withBasename: basename.
+	self writeEvent: anEvent printString withBasename: basename.
 	errorHandler := (self class environment at: aStrategy asSymbol) new
 		context: context.
 	dictionary := Dictionary new.
