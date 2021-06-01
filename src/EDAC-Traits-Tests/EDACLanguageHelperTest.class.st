@@ -1,13 +1,13 @@
 Class {
-	#name : #EDACTLanguageHelperTest,
+	#name : #EDACLanguageHelperTest,
 	#superclass : #TestCase,
-	#traits : 'EDACTLanguageHelper',
-	#classTraits : 'EDACTLanguageHelper classTrait',
+	#traits : 'EDACLanguageHelper',
+	#classTraits : 'EDACLanguageHelper classTrait',
 	#category : #'EDAC-Traits-Tests'
 }
 
 { #category : #tests }
-EDACTLanguageHelperTest >> testNounInPlural [
+EDACLanguageHelperTest >> testNounInPlural [
 	self assert: (self nounInPlural: 'applicant') equals: 'applicants'.
 	self assert: (self nounInPlural: 'applicants') equals: 'applicants'.
 	self assert: (self nounInPlural: 'contest') equals: 'contests'.
@@ -27,7 +27,7 @@ EDACTLanguageHelperTest >> testNounInPlural [
 ]
 
 { #category : #tests }
-EDACTLanguageHelperTest >> testNounInSingular [
+EDACLanguageHelperTest >> testNounInSingular [
 	self assert: (self nounInSingular: 'applicants') equals: 'applicant'.
 	self assert: (self nounInSingular: 'applicant') equals: 'applicant'.
 	self assert: (self nounInSingular: 'contests') equals: 'contest'.
@@ -47,18 +47,18 @@ EDACTLanguageHelperTest >> testNounInSingular [
 ]
 
 { #category : #tests }
-EDACTLanguageHelperTest >> testRemovePrefix [
+EDACLanguageHelperTest >> testRemovePrefix [
 	self assert: (self removePrefix: 'SKILL' from: 'SKILL_TYPE') equals: '_TYPE'.
 	self assert: (self removePrefix: 'file://' from: 'file:///home/whatever') equals: '/home/whatever'
 ]
 
 { #category : #tests }
-EDACTLanguageHelperTest >> testRemoveSuffix [
+EDACLanguageHelperTest >> testRemoveSuffix [
 	self assert: (self removeSuffix: 'TYPE' from: 'SKILL_TYPE') equals: 'SKILL_'.
 	self assert: (self removeSuffix: ':8080' from: 'http://server:8080') equals: 'http://server'
 ]
 
 { #category : #tests }
-EDACTLanguageHelperTest >> testVerbInPresentTense [
+EDACLanguageHelperTest >> testVerbInPresentTense [
 	self assert: (self verbInPresentTense: 'created') equals: 'create'
 ]
