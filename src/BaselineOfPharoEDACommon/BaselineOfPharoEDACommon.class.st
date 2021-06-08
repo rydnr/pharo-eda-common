@@ -19,7 +19,7 @@ BaselineOfPharoEDACommon >> declareGroupsIn: spec [
 	spec
 		group: 'core'
 			with:
-			#(#'EDAC-Traits');
+			#(#'EDAC-Traits' #'EDAC-Messaging');
 		group: 'tests'
 			with:
 			#(#'EDAC-Traits-Tests');
@@ -30,6 +30,8 @@ BaselineOfPharoEDACommon >> declareGroupsIn: spec [
 BaselineOfPharoEDACommon >> declarePackagesIn: spec [
 	spec
 		package: #'EDAC-Traits';
+		package: #'EDAC-Messaging'
+			with: [ spec requires: #('EDAC-Traits') ];
 		package: #'EDAC-Traits-Tests'
 			with: [ spec requires: #('EDAC-Traits') ]
  
