@@ -208,7 +208,7 @@ EDACErrorHelper >> writeEvent: aString withBasename: aBasename [
 EDACErrorHelper >> writeFuelContext: aContext named: aString withBasename: aBasename [
 	| parentFolder |
 	parentFolder := self class errorFolderFor: aBasename.
-	^ EDATFuelHelper new
+	^ EDACFuelHelper new
 		writeFuelContext: aContext
 		named: 'session.fuel'
 		inFolder: parentFolder
