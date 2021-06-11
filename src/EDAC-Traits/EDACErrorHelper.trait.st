@@ -89,6 +89,11 @@ EDACErrorHelper classSide >> logWarningMessage: aMessage beautify: aBoolean [
 ]
 
 { #category : #handling }
+EDACErrorHelper >> logErrorMessage: aString [
+	^ EDACLoggingStub new logErrorMessage: aString
+]
+
+{ #category : #handling }
 EDACErrorHelper >> manageError: anException forCommand: aCommand usingErrorStrategy: aStrategy [
 	| errorHandler result context basename dictionary |
 	errorHandler := (self class environment at: aStrategy asSymbol) new.

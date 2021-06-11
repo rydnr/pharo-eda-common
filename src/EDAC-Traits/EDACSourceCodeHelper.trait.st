@@ -1,6 +1,5 @@
 Trait {
 	#name : #EDACSourceCodeHelper,
-	#traits : 'EDACLanguageHelper + EDACCollectionHelper',
 	#category : #'EDAC-Traits'
 }
 
@@ -143,6 +142,11 @@ EDACSourceCodeHelper >> containsAnyDisableRegenerationMethod: aClass [
 { #category : #helper }
 EDACSourceCodeHelper >> cr [
 	^ Character cr
+]
+
+{ #category : #helper }
+EDACSourceCodeHelper >> csvToCollection: aString [
+	^ EDACCollectionHelper csvToCollection: aString
 ]
 
 { #category : #helper }

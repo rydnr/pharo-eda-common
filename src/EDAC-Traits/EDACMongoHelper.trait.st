@@ -1,8 +1,12 @@
 Trait {
 	#name : #EDACMongoHelper,
-	#traits : 'EDACCollectionHelper',
 	#category : #'EDAC-Traits'
 }
+
+{ #category : #helper }
+EDACMongoHelper >> csvToCollection: aString [
+	^ EDACCollectionHelper csvToCollection: aString
+]
 
 { #category : #persistence }
 EDACMongoHelper >> initBackendRepository [
