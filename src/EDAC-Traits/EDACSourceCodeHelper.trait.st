@@ -176,8 +176,16 @@ EDACSourceCodeHelper >> generateSignature [
 { #category : #helper }
 EDACSourceCodeHelper >> generatedProtocolFor: aNumber [
 	| result |
-	result := (aNumber ifNil: [ 'generated' ] ifNotNil: [ 'generated-v' , aNumber greaseString ]) asSymbol.
+	result := (aNumber
+		ifNil: [ 'generated' ]
+		ifNotNil: [ :arg | 'generated-v' , arg greaseString ]) asSymbol.
 	^ result
+]
+
+{ #category : #helper }
+EDACSourceCodeHelper >> isAggregate: aSymbol [
+	"Override me with extension methods if needed"
+	^ false
 ]
 
 { #category : #'compilation-support' }
@@ -193,7 +201,7 @@ EDACSourceCodeHelper >> normalize: aString [
 { #category : #helper }
 EDACSourceCodeHelper >> remove: prefix fromBeginningOf: aString [
 	| result |
-	result := (aString beginsWith: prefix) ifTrue: [ aString copyReplaceFrom: 1 to: prefix size with: '' ] ifFalse: [ aString ].
+	result := (aString beginsWithSubCollection: prefix) ifTrue: [ aString copyReplaceFrom: 1 to: prefix size with: '' ] ifFalse: [ aString ].
 	^ result
 ]
 
