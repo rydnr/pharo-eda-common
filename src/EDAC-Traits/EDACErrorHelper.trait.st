@@ -191,7 +191,7 @@ EDACErrorHelper >> writeCommand: aCommand withBasename: aBasename [
 	| result |
 	result := (self class errorFolderFor: aBasename)
 		/ (aCommand class printString , '.txt').
-	result writeStream
+	(WriteStream on: result)
 		nextPutAll: aCommand printString;
 		close.
 	^ result
@@ -201,7 +201,7 @@ EDACErrorHelper >> writeCommand: aCommand withBasename: aBasename [
 EDACErrorHelper >> writeEvent: aString withBasename: aBasename [
 	| result |
 	result := (self class errorFolderFor: aBasename) / 'event.txt'.
-	result writeStream
+	(WriteStream on: result)
 		nextPutAll: aString;
 		close.
 	^ result
@@ -221,7 +221,7 @@ EDACErrorHelper >> writeFuelContext: aContext named: aString withBasename: aBase
 EDACErrorHelper >> writeMessage: aString withBasename: aBasename [
 	| result |
 	result := (self class errorFolderFor: aBasename) / 'message.txt'.
-	result writeStream
+	(WriteStream on: result)
 		nextPutAll: aString;
 		close.
 	^ result
