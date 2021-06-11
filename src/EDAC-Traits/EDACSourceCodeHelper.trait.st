@@ -1,5 +1,7 @@
 Trait {
 	#name : #EDACSourceCodeHelper,
+	#traits : 'EDACLanguageHelper + EDACCollectionHelper',
+	#classTraits : 'EDACLanguageHelper classTrait + EDACCollectionHelper classTrait',
 	#category : #'EDAC-Traits'
 }
 
