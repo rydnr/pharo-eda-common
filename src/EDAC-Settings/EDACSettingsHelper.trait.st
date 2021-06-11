@@ -1,6 +1,6 @@
 Trait {
 	#name : #EDACSettingsHelper,
-	#category : #'EDAC-Traits'
+	#category : #'EDAC-Settings'
 }
 
 { #category : #helpers }
@@ -31,4 +31,19 @@ EDACSettingsHelper classSide >> retrieveSettingAsDict: entryName using: env [
 			result := self retrieveFlattenedSettingAsDict: (tokens allButFirst joinUsing: '/') using: (self retrieveFlattenedSettingAsDict: parent using: env) ]
 		ifFalse: [ result := self retrieveFlattenedSettingAsDict: entryName using: env ].
 	result ifNil: [ ^ Dictionary new ] ifNotNil: [ :r | ^ r ]
+]
+
+{ #category : #helpers }
+EDACSettingsHelper >> retrieveFlattenedSettingAsDict: entryName using: env [
+	^ self class retrieveFlattenedSettingAsDict: entryName using: env
+]
+
+{ #category : #helpers }
+EDACSettingsHelper >> retrieveSettingAsDict: entryName [
+	^ self class retrieveSettingAsDict: entryName
+]
+
+{ #category : #helpers }
+EDACSettingsHelper >> retrieveSettingAsDict: entryName using: env [
+	^ self class retrieveSettingAsDict: entryName using: env
 ]

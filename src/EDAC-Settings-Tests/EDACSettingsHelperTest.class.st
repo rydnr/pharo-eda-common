@@ -3,7 +3,7 @@ Class {
 	#superclass : #TestCase,
 	#traits : 'EDACSettingsHelper',
 	#classTraits : 'EDACSettingsHelper classTrait',
-	#category : #'EDAC-Traits-Tests'
+	#category : #'EDAC-Settings-Tests'
 }
 
 { #category : #tests }

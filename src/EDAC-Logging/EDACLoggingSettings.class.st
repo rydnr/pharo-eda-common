@@ -9,7 +9,7 @@ Class {
 		'loggingLevel',
 		'traceEnabled'
 	],
-	#category : #'EDAC-Traits'
+	#category : #'EDAC-Logging'
 }
 
 { #category : #accessing }

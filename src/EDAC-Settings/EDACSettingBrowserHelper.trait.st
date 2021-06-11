@@ -1,6 +1,6 @@
 Trait {
 	#name : #EDACSettingBrowserHelper,
-	#category : #'EDAC-Traits'
+	#category : #'EDAC-Settings'
 }
 
 { #category : #helper }
@@ -12,5 +12,5 @@ EDACSettingBrowserHelper classSide >> refreshSettingBrowsers [
 
 { #category : #helper }
 EDACSettingBrowserHelper >> refreshSettingBrowsers [
-	self class refreshSettingBrowsers
+	^ self class refreshSettingBrowsers
 ]

@@ -1,7 +1,7 @@
 Class {
 	#name : #EDACFuelHelper,
 	#superclass : #Object,
-	#category : #'EDAC-Traits'
+	#category : #'EDAC-Fuel'
 }
 
 { #category : #handling }

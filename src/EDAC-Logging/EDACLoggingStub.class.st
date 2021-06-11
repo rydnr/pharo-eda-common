@@ -18,7 +18,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'EDACLogging',
 	#classTraits : 'EDACLogging classTrait',
-	#category : #'EDAC-Traits'
+	#category : #'EDAC-Logging'
 }
 
 { #category : #logging }

@@ -28,7 +28,7 @@ So far such entity doesn't exist, and meanwhile I log everything to Transcript a
 "
 Trait {
 	#name : #EDACLogging,
-	#category : #'EDAC-Traits'
+	#category : #'EDAC-Logging'
 }
 
 { #category : #logging }
