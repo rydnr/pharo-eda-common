@@ -19,7 +19,7 @@ BaselineOfPharoEDACommon >> declareGroupsIn: spec [
 	spec
 		group: 'core'
 			with:
-			#(#'EDAC-Fuel' #'EDAC-Traits'  #'EDAC-Logging' #'EDAC-Messaging' #'EDAC-Settings');
+			#(#'EDAC-Fuel' #'EDAC-Logging' #'EDAC-Traits' #'EDAC-Messaging' #'EDAC-Settings');
 		group: 'tests' with: #(#'EDAC-Traits-Tests' #'EDAC-Settings-Tests');
 		group: 'default' with: #('core' 'tests')
 ]
@@ -28,10 +28,10 @@ BaselineOfPharoEDACommon >> declareGroupsIn: spec [
 BaselineOfPharoEDACommon >> declarePackagesIn: spec [
 	spec
 		package: #'EDAC-Fuel';
-		package: #'EDAC-Traits' with: [ spec requires: #('EDAC-Fuel') ];
+		package: #'EDAC-Logging';
+		package: #'EDAC-Traits' with: [ spec requires: #('EDAC-Fuel' 'EDAC-Logging') ];
 		package: #'EDAC-Traits-Tests'
 			with: [ spec requires: #('EDAC-Traits') ];
-		package: #'EDAC-Logging' with: [ spec requires: #('EDAC-Traits') ];
 		package: #'EDAC-Messaging'
 			with: [ spec requires: #('EDAC-Traits') ];
 		package: #'EDAC-Settings';
