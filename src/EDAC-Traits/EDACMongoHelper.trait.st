@@ -1,6 +1,5 @@
 Trait {
 	#name : #EDACMongoHelper,
-	#traits : 'EDACCollectionHelper',
 	#category : #'EDAC-Traits'
 }
 

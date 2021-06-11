@@ -20,6 +20,8 @@ Public API and Key Messages:
 "
 Trait {
 	#name : #EDACErrorHelper,
+	#traits : 'EDACLogging',
+	#classTraits : 'EDACLogging classTrait',
 	#category : #'EDAC-Traits'
 }
 
