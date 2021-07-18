@@ -1,5 +1,5 @@
 Class {
-	#name : #EDAInvalidLoggingLevel,
+	#name : #EDACInvalidLoggingLevel,
 	#superclass : #Error,
 	#category : #'EDAC-Logging'
 }
