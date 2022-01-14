@@ -15,7 +15,7 @@ A catalog of domain-agnostic classes and traits.
 Load it with Metacello:
 
 ```smalltalk
-Metacello new repository: 'github://osoco/pharo-eda-common:main'; baseline: #PharoEDACommon; load
+Metacello new repository: 'github://rydnr/pharo-eda-common:main'; baseline: #PharoEDACommon; load
 ```
 
 Use the classes in your code.
