@@ -4,7 +4,7 @@ version = "${tag}-SNAPSHOT" // do not forget to update the version also in docke
 apply plugin: PharoPlugin
 
 pharo {
-    imageVersion = '80'
+    imageVersion = '90'
 }
 
 def imageName = "${project.name}-${project.version}"
