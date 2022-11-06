@@ -1,3 +1,16 @@
+"
+_Class_
+
+I'm a translation provider that delegates the translation to other providers.
+
+_Responsibilities_
+
+Translate text
+
+_Collaborators_
+
+The current NaturalLanguageProcessor and EDACTranslationProvider.
+"
 Class {
 	#name : #EDACCompositeTranslationProvider,
 	#superclass : #Object,

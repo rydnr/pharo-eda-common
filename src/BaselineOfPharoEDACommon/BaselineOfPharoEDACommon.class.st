@@ -1,3 +1,16 @@
+"
+**Class**
+
+I'm a baseline to load PharoEDA Common.
+
+**Responsibilities**
+
+Guide Metacello to load PharoEDA-Common with its dependencies.
+
+**Collaborators**
+
+Metacello
+"
 Class {
 	#name : #BaselineOfPharoEDACommon,
 	#superclass : #BaselineOf,
@@ -46,12 +59,14 @@ BaselineOfPharoEDACommon >> declarePackagesIn: spec [
 		with: [ spec requires: #( 'EDAC-Settings' ) ]
 ]
 
-{ #category : #hook }
-BaselineOfPharoEDACommon >> postload: aLoader package: aPackageSpec [
+{ #category : #hooks }
+BaselineOfPharoEDACommon >> postload: loader package: packageSpec [
 
-	Locale localeID: 'es-ES'.
-	EDACTranslationProvider translationsFolder:
-		(IceRepository registry detect: [ :each | each name = 'pharo-eda' ])
-			location / 'resources' / 'l10n'.
-	NaturalLanguageTranslator current: EDACCompositeTranslationProvider wrapCurrent
+	| location |
+	Locale localeID: 'es'.
+	location := (IceRepository registry detect: [ :each | 
+		             each name = 'pharo-eda-common' ]) location.
+	EDAIconProvider addDefaultLocation: location / 'resources' / 'icons'.
+	EDACTranslationProvider addDefaultLocation:
+		location / 'resources' / 'l10n'
 ]

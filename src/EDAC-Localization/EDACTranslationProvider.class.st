@@ -1,13 +1,24 @@
+"
+_Class_
+
+I represent something than can provide text translations.
+
+_Responsibilities_
+
+I read json files and use their contents as translations.
+"
 Class {
 	#name : #EDACTranslationProvider,
 	#superclass : #Object,
+	#traits : 'EDACLanguageHelper',
+	#classTraits : 'EDACLanguageHelper classTrait',
 	#instVars : [
 		'translations',
-		'locations'
+		'locations',
+		'locales'
 	],
 	#classVars : [
-		'DefaultLocations',
-		'TranslationsFolder'
+		'DefaultLocations'
 	],
 	#category : #'EDAC-Localization'
 }
@@ -25,20 +36,9 @@ EDACTranslationProvider class >> defaultLocations [
 		  DefaultLocations := OrderedCollection
 			                      with:
 			                      FileSystem workingDirectory / 'resources'
-			                      / 'l10n'
-			                      with: self translationsFolder ]
-]
-
-{ #category : #accessing }
-EDACTranslationProvider class >> translationsFolder [
-
-	^ TranslationsFolder
-]
-
-{ #category : #accessing }
-EDACTranslationProvider class >> translationsFolder: aFolder [
-
-	TranslationsFolder := aFolder
+			                      / 'l10n'.
+			                      
+		  DefaultLocations ]
 ]
 
 { #category : #initialization }
@@ -46,19 +46,45 @@ EDACTranslationProvider >> initialize [
 
 	super initialize.
 	translations := Dictionary new.
-	locations := OrderedCollection withAll: self class defaultLocations
+	locations := OrderedCollection withAll: self class defaultLocations.
+	"self readTranslationsFromLocations"
+]
+
+{ #category : #accessing }
+EDACTranslationProvider >> locales [
+
+	^ locales ifNil: [ self locales: Dictionary new. locales ]
+]
+
+{ #category : #accessing }
+EDACTranslationProvider >> locales: aDictionary [
+
+	locales := aDictionary
 ]
 
 { #category : #accessing }
 EDACTranslationProvider >> locations [
 
-	^ locations
+	^ locations select: [ :each | each exists ]
 ]
 
 { #category : #accessing }
 EDACTranslationProvider >> locations: anObject [
 
 	locations := anObject
+]
+
+{ #category : #initialization }
+EDACTranslationProvider >> readTranslationsFromLocations [
+
+	self locations do: [ :each |
+		each entries do: [ :file | 
+			| localeName locale |
+			localeName := self removeSuffix: '.json' from: file basename.
+			locale := self locales
+				          at: localeName
+				          ifAbsentPut: [ Dictionary new ].
+			locale addAll: (NeoJSONReader on: file readStream) next ] ]
 ]
 
 { #category : #translate }
