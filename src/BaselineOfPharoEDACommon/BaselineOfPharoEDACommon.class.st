@@ -30,17 +30,20 @@ BaselineOfPharoEDACommon >> declareGroupsIn: spec [
 
 { #category : #meta }
 BaselineOfPharoEDACommon >> declarePackagesIn: spec [
+
 	spec
 		package: #'EDAC-Fuel';
 		package: #'EDAC-Logging';
-		package: #'EDAC-Traits' with: [ spec requires: #('EDAC-Fuel' 'EDAC-Logging') ];
+		package: #'EDAC-Localization';
+		package: #'EDAC-Traits'
+		with: [ spec requires: #( 'EDAC-Fuel' 'EDAC-Logging' ) ];
 		package: #'EDAC-Traits-Tests'
-			with: [ spec requires: #('EDAC-Traits') ];
+		with: [ spec requires: #( 'EDAC-Traits' ) ];
 		package: #'EDAC-Messaging'
-			with: [ spec requires: #('EDAC-Traits') ];
+		with: [ spec requires: #( 'EDAC-Traits' ) ];
 		package: #'EDAC-Settings';
 		package: #'EDAC-Settings-Tests'
-			with: [ spec requires: #('EDAC-Settings') ]
+		with: [ spec requires: #( 'EDAC-Settings' ) ]
 ]
 
 { #category : #hook }
