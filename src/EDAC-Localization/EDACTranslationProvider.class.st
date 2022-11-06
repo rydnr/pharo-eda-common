@@ -61,6 +61,18 @@ EDACTranslationProvider >> locations: anObject [
 	locations := anObject
 ]
 
+{ #category : #translate }
+EDACTranslationProvider >> translate: aString [
+
+	^ aString
+]
+
+{ #category : #translate }
+EDACTranslationProvider >> translate: aString to: aLocale [
+
+	^ aString
+]
+
 { #category : #accessing }
 EDACTranslationProvider >> translations [
 

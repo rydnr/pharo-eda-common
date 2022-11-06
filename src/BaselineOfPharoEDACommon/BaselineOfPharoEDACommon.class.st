@@ -52,5 +52,7 @@ BaselineOfPharoEDACommon >> postload: aLoader package: aPackageSpec [
 	Locale localeID: 'es-ES'.
 	EDACTranslationProvider translationsFolder:
 		(IceRepository registry detect: [ :each | each name = 'pharo-eda' ])
-			location / 'resources' / 'l10n'
+			location / 'resources' / 'l10n'.
+	NaturalLanguageTranslator current ifNil: [ 
+		NaturalLanguageTranslator current: EDACTranslationProvider new ]
 ]
