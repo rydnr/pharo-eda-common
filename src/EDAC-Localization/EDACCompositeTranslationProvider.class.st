@@ -37,9 +37,7 @@ EDACCompositeTranslationProvider >> addProvider: aProvider [
 { #category : #accessing }
 EDACCompositeTranslationProvider >> providers [
 
-	^ providers ifNil: [ 
-		  self providers:
-			  (OrderedCollection new) ]
+	^ providers ifNil: [ self providers: OrderedCollection new. providers ]
 ]
 
 { #category : #accessing }
