@@ -6,22 +6,26 @@ Class {
 
 { #category : #baselines }
 BaselineOfPharoEDACommon >> baseline: spec [
+
 	<baseline>
-	spec
-		for: #common
-		do: [ spec blessing: #baseline.
-			self declarePackagesIn: spec.
-			self declareGroupsIn: spec ]
+	spec for: #common do: [ 
+		spec blessing: #baseline.
+		spec postLoadDoIt: #postload:package:.
+		self declarePackagesIn: spec.
+		self declareGroupsIn: spec ]
 ]
 
 { #category : #meta }
 BaselineOfPharoEDACommon >> declareGroupsIn: spec [
+
 	spec
 		group: 'core'
-			with:
-			#(#'EDAC-Fuel' #'EDAC-Logging' #'EDAC-Traits' #'EDAC-Messaging' #'EDAC-Settings');
-		group: 'tests' with: #(#'EDAC-Traits-Tests' #'EDAC-Settings-Tests');
-		group: 'default' with: #('core' 'tests')
+		with:
+			#( #'EDAC-Fuel' #'EDAC-Logging' #'EDAC-Traits' #'EDAC-Messaging'
+			   #'EDAC-Settings' #'EDAC-Localization');
+		group: 'tests'
+		with: #( #'EDAC-Traits-Tests' #'EDAC-Settings-Tests' );
+		group: 'default' with: #( 'core' 'tests' )
 ]
 
 { #category : #meta }
@@ -37,4 +41,13 @@ BaselineOfPharoEDACommon >> declarePackagesIn: spec [
 		package: #'EDAC-Settings';
 		package: #'EDAC-Settings-Tests'
 			with: [ spec requires: #('EDAC-Settings') ]
+]
+
+{ #category : #hook }
+BaselineOfPharoEDACommon >> postload: aLoader package: aPackageSpec [
+
+	Locale localeID: 'es-ES'.
+	EDACTranslationProvider translationsFolder:
+		(IceRepository registry detect: [ :each | each name = 'pharo-eda' ])
+			location / 'resources' / 'l10n'
 ]
