@@ -8,7 +8,7 @@ I am something that finds and provides icons.
 I'm given instructions as of where to look, and provide icons on demand by searching on those folders.
 "
 Class {
-	#name : #EDAIconProvider,
+	#name : #EDACIconProvider,
 	#superclass : #Object,
 	#instVars : [
 		'icons',
@@ -22,44 +22,44 @@ Class {
 }
 
 { #category : #defaults }
-EDAIconProvider class >> addDefaultLocation: aFolder [
+EDACIconProvider class >> addDefaultLocation: aFolder [
 
 	self defaultLocations add: aFolder
 ]
 
 { #category : #defaults }
-EDAIconProvider class >> defaultLocations [
+EDACIconProvider class >> defaultLocations [
 
 	^ DefaultLocations ifNil: [ DefaultLocations := OrderedCollection with: FileSystem workingDirectory / 'resources' / 'icons'
 		  with: self iconsFolder ]
 ]
 
 { #category : #defaults }
-EDAIconProvider class >> iconsFolder [
+EDACIconProvider class >> iconsFolder [
 
 	^ IconsFolder
 ]
 
 { #category : #defaults }
-EDAIconProvider class >> iconsFolder: aFolder [
+EDACIconProvider class >> iconsFolder: aFolder [
 
 	IconsFolder ifNil: [ IconsFolder := aFolder ]
 ]
 
 { #category : #initialization }
-EDAIconProvider >> addLocation: aFileReference [
+EDACIconProvider >> addLocation: aFileReference [
 
 	self locations add: aFileReference
 ]
 
 { #category : #accessing }
-EDAIconProvider >> iconNamed: aName [
+EDACIconProvider >> iconNamed: aName [
 
 	^ self iconNamed: aName ifAbsent: [ Smalltalk ui icons iconNamed: aName ifNone: #comments ]
 ]
 
 { #category : #accessing }
-EDAIconProvider >> iconNamed: aName ifAbsent: aBlock [
+EDACIconProvider >> iconNamed: aName ifAbsent: aBlock [
 
     | icon |
     icon := icons at: aName ifAbsent: [ nil ].
@@ -72,19 +72,19 @@ EDAIconProvider >> iconNamed: aName ifAbsent: aBlock [
 ]
 
 { #category : #accessing }
-EDAIconProvider >> icons [
+EDACIconProvider >> icons [
 
 	^ icons
 ]
 
 { #category : #accessing }
-EDAIconProvider >> icons: anObject [
+EDACIconProvider >> icons: anObject [
 
 	icons := anObject
 ]
 
 { #category : #initialization }
-EDAIconProvider >> initialize [
+EDACIconProvider >> initialize [
 
 	super initialize.
 	icons := Dictionary new.
@@ -92,7 +92,7 @@ EDAIconProvider >> initialize [
 ]
 
 { #category : #accessing }
-EDAIconProvider >> loadIcon: fileReference [
+EDACIconProvider >> loadIcon: fileReference [
 
 	fileReference exists ifFalse: [ 
 		self error:
@@ -103,7 +103,7 @@ EDAIconProvider >> loadIcon: fileReference [
 ]
 
 { #category : #accessing }
-EDAIconProvider >> loadIconNamed: aSymbol [
+EDACIconProvider >> loadIconNamed: aSymbol [
 
     self locations do: [ :each | | ref |
         ref := (each / aSymbol) withExtension: 'png'.
@@ -113,7 +113,7 @@ EDAIconProvider >> loadIconNamed: aSymbol [
 ]
 
 { #category : #accessing }
-EDAIconProvider >> locations [
+EDACIconProvider >> locations [
 
 	^ locations
 ]
