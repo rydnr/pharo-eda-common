@@ -49,7 +49,7 @@ EDACIconProvider class >> iconsFolder: aFolder [
 { #category : #initialization }
 EDACIconProvider >> addLocation: aFileReference [
 
-	self locations add: aFileReference
+	aFileReference ifNotNil: [ :arg | self locations add: arg ]
 ]
 
 { #category : #accessing }
