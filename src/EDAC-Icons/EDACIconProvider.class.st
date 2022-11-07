@@ -62,6 +62,19 @@ EDACIconProvider >> iconNamed: aName ifAbsent: aBlock [
 ]
 
 { #category : #accessing }
+EDACIconProvider >> iconNamed: aName orElse: aDefaultName [
+
+    | icon |
+    icon := icons at: aName ifAbsent: [ nil ].
+    icon ifNil: [ 
+        icon := self loadIconNamed: aName.
+        icon ifNil: [ ^ Smalltalk ui iconNamed: #smallConfiguration ].
+        icons at: aName put: icon ].
+
+    ^ icon
+]
+
+{ #category : #accessing }
 EDACIconProvider >> icons [
 
 	^ icons
