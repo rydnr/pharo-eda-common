@@ -33,7 +33,7 @@ EDACTranslationProvider class >> addDefaultLocation: aFolder [
 EDACTranslationProvider class >> defaultLocations [
 
 	^ DefaultLocations ifNil: [ 
-		  DefaultLocations := OrderedCollection
+		  DefaultLocations := Set
 			                      with:
 			                      FileSystem workingDirectory / 'resources'
 			                      / 'l10n'.
