@@ -24,7 +24,7 @@ Class {
 { #category : #defaults }
 EDACIconProvider class >> addDefaultLocation: aFolder [
 
-	self defaultLocations add: aFolder
+	aFolder ifNotNil: [ :f | self defaultLocations add: f ]
 ]
 
 { #category : #defaults }
