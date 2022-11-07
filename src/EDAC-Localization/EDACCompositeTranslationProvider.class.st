@@ -38,7 +38,12 @@ EDACCompositeTranslationProvider class >> with: aProvider with: anotherProvider 
 { #category : #'instance creation' }
 EDACCompositeTranslationProvider class >> wrapCurrent [
 
-	^ self with: EDACTranslationProvider new with: NaturalLanguageTranslator current
+	^ NaturalLanguageTranslator current
+		  ifNil: [ self with: EDACTranslationProvider ]
+		  ifNotNil: [ :cur | 
+			  self
+				  with: EDACTranslationProvider new
+				  with: cur ]
 ]
 
 { #category : #accessing }

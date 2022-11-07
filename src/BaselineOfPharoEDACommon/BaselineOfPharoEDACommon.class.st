@@ -71,5 +71,6 @@ BaselineOfPharoEDACommon >> postload: loader package: packageSpec [
 		             each name = 'pharo-eda-common' ]) location.
 	EDACIconProvider addDefaultLocation: location / 'resources' / 'icons'.
 	EDACTranslationProvider addDefaultLocation:
-		location / 'resources' / 'l10n'
+		location / 'resources' / 'l10n'.
+	NaturalLanguageTranslator current: EDACCompositeTranslationProvider wrapCurrent
 ]
