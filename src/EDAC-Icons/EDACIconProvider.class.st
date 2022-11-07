@@ -30,20 +30,10 @@ EDACIconProvider class >> addDefaultLocation: aFolder [
 { #category : #defaults }
 EDACIconProvider class >> defaultLocations [
 
-	^ DefaultLocations ifNil: [ DefaultLocations := OrderedCollection with: FileSystem workingDirectory / 'resources' / 'icons'
-		  with: self iconsFolder ]
-]
-
-{ #category : #defaults }
-EDACIconProvider class >> iconsFolder [
-
-	^ IconsFolder
-]
-
-{ #category : #defaults }
-EDACIconProvider class >> iconsFolder: aFolder [
-
-	IconsFolder ifNil: [ IconsFolder := aFolder ]
+	^ DefaultLocations ifNil: [ 
+		  DefaultLocations := OrderedCollection with:
+			                      FileSystem workingDirectory / 'resources'
+			                      / 'icons' ]
 ]
 
 { #category : #initialization }
