@@ -68,9 +68,12 @@ EDACCompositeTranslationProvider >> translate: aString [
 ]
 
 { #category : #accessing }
-EDACCompositeTranslationProvider >> translate: aString to: aLocale [
+EDACCompositeTranslationProvider >> translate: aString toLocale: aLocaleID [
 
 	^ (self providers
-		   detect: [ :each | (each translate: aString to: aLocale) isNotNil ]
-		   ifNone: [ EDACTranslationProvider new ]) translate: aString to: aLocale
+		   detect: [ :each | 
+		   (each translate: aString toLocale: aLocaleID) isNotNil ]
+		   ifNone: [ EDACTranslationProvider new ])
+		  translate: aString
+		  toLocale: aLocaleID
 ]

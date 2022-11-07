@@ -14,8 +14,7 @@ Class {
 	#classTraits : 'EDACLanguageHelper classTrait',
 	#instVars : [
 		'translations',
-		'locations',
-		'locales'
+		'locations'
 	],
 	#classVars : [
 		'DefaultLocations'
@@ -49,19 +48,7 @@ EDACTranslationProvider >> initialize [
 	super initialize.
 	translations := Dictionary new.
 	locations := OrderedCollection withAll: self class defaultLocations.
-	"self readTranslationsFromLocations"
-]
-
-{ #category : #accessing }
-EDACTranslationProvider >> locales [
-
-	^ locales ifNil: [ self locales: Dictionary new. locales ]
-]
-
-{ #category : #accessing }
-EDACTranslationProvider >> locales: aDictionary [
-
-	locales := aDictionary
+	self readTranslationsFromLocations
 ]
 
 { #category : #accessing }
@@ -81,10 +68,11 @@ EDACTranslationProvider >> readTranslationsFromLocations [
 
 	self locations do: [ :each |
 		each entries do: [ :file | 
-			| localeName locale |
+			| localeName localeID locale |
 			localeName := self removeSuffix: '.json' from: file basename.
-			locale := self locales
-				          at: localeName
+			localeID := LocaleID isoString: localeName.
+			locale := self translations
+				          at: localeID
 				          ifAbsentPut: [ Dictionary new ].
 			locale addAll: (NeoJSONReader on: file readStream) next ] ]
 ]
@@ -92,23 +80,31 @@ EDACTranslationProvider >> readTranslationsFromLocations [
 { #category : #translate }
 EDACTranslationProvider >> translate: aString [
 
-	^ aString
+	^ self translate: aString toLocale: LocaleID current
 ]
 
 { #category : #translate }
-EDACTranslationProvider >> translate: aString to: aLocale [
+EDACTranslationProvider >> translate: aString toLocale: aLocaleID [
 
-	^ aString
+	| translationsInLocale |
+	translationsInLocale := translations at: aLocaleID ifAbsent: [ 
+		                        aLocaleID isoCountry
+			                        ifNil: [ Dictionary new ]
+			                        ifNotNil: [ :l | 
+			                        translations
+				                        at: aLocaleID parent
+				                        ifAbsent: [ Dictionary new ] ] ].
+	^ translationsInLocale at: aString ifAbsent: [ aString ]
 ]
 
 { #category : #accessing }
 EDACTranslationProvider >> translations [
 
-	^ translations
+	^ translations ifNil: [ self translations: Dictionary new. translations ]
 ]
 
 { #category : #accessing }
-EDACTranslationProvider >> translations: anObject [
+EDACTranslationProvider >> translations: aDictionary [
 
-	translations := anObject
+	translations := aDictionary
 ]
