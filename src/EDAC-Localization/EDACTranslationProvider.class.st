@@ -26,14 +26,16 @@ Class {
 { #category : #defaults }
 EDACTranslationProvider class >> addDefaultLocation: aFolder [
 
-	self defaultLocations add: aFolder
+	| locations |
+	locations := self defaultLocations.
+	(locations includes: aFolder) ifFalse: [ locations add: aFolder ]
 ]
 
 { #category : #defaults }
 EDACTranslationProvider class >> defaultLocations [
 
 	^ DefaultLocations ifNil: [ 
-		  DefaultLocations := Set
+		  DefaultLocations := OrderedCollection
 			                      with:
 			                      FileSystem workingDirectory / 'resources'
 			                      / 'l10n'.
