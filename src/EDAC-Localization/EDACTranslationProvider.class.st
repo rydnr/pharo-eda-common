@@ -66,15 +66,35 @@ EDACTranslationProvider >> locations: anObject [
 { #category : #initialization }
 EDACTranslationProvider >> readTranslationsFromLocations [
 
-	self locations do: [ :each |
+	self locations do: [ :each | 
 		each entries do: [ :file | 
-			| localeName localeID locale |
+			| localeName localeID locale block mappings |
 			localeName := self removeSuffix: '.json' from: file basename.
 			localeID := LocaleID isoString: localeName.
 			locale := self translations
 				          at: localeID
 				          ifAbsentPut: [ Dictionary new ].
-			locale addAll: (NeoJSONReader on: file readStream) next ] ]
+			block := [ :parent :entry :innerTranslations :innerBlock | 
+			         entry keysAndValuesDo: [ :k :v | 
+				         | key |
+				         key := ('' join: { 
+						                 parent.
+						                 '.'.
+						                 k }) asSymbol.
+				         v isDictionary ifTrue: [ 
+					         innerBlock
+						         value: key
+						         value: v
+						         value: innerTranslations
+						         value: innerBlock ] ifFalse: [ innerTranslations at: key put: v ] ] ].
+			mappings := Dictionary new.
+			(NeoJSONReader on: file readStream) next keysAndValuesDo: [ :k :v | 
+				block
+					value: k
+					value: v
+					value: mappings
+					value: block ].
+			locale addAll: mappings ] ]
 ]
 
 { #category : #translate }
