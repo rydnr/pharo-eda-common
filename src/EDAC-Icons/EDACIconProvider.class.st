@@ -45,7 +45,9 @@ EDACIconProvider >> addLocation: aFileReference [
 { #category : #accessing }
 EDACIconProvider >> iconNamed: aName [
 
-	^ self iconNamed: aName ifAbsent: [ Smalltalk ui icons iconNamed: aName ifNone: #comments ]
+	^ self
+		  iconNamed: aName
+		  ifAbsent: [ Smalltalk ui icons iconNamed: aName ifNone: [ Smalltalk ui icons iconNamed: #comments ifNone: [ nil ] ] ]
 ]
 
 { #category : #accessing }
@@ -64,14 +66,15 @@ EDACIconProvider >> iconNamed: aName ifAbsent: aBlock [
 { #category : #accessing }
 EDACIconProvider >> iconNamed: aName orElse: aDefaultName [
 
-    | icon |
-    icon := icons at: aName ifAbsent: [ nil ].
-    icon ifNil: [ 
-        icon := self loadIconNamed: aName.
-        icon ifNil: [ ^ Smalltalk ui iconNamed: #smallConfiguration ].
-        icons at: aName put: icon ].
-
-    ^ icon
+	^ icons at: aName ifAbsent: [ 
+		  (self loadIconNamed: aName)
+			  ifNil: [ 
+				  (self loadIconNamed: aDefaultName) ifNil: [ 
+					  (Smalltalk ui iconNamed: aName) ifNil: [ 
+						  Smalltalk ui iconNamed: aDefaultName ] ] ]
+			  ifNotNil: [ :i | 
+				  icons at: aName put: i.
+				  i ] ]
 ]
 
 { #category : #accessing }
