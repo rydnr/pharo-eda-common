@@ -1,5 +1,7 @@
 Trait {
 	#name : #EDACSourceCodeHelper,
+	#traits : 'EDACReflectionHelper',
+	#classTraits : 'EDACReflectionHelper classTrait',
 	#category : #'EDAC-Traits'
 }
 
@@ -70,11 +72,6 @@ EDACSourceCodeHelper >> checkBytecodeHash: methodName sourceCode: method inClass
 			result := generatedMethod bytecodesHash = existingMethod bytecodesHash.
 			tempClass removeFromSystem ].
 	^ result
-]
-
-{ #category : #helper }
-EDACSourceCodeHelper >> classExists: className [
-	^ Smalltalk hasClassNamed: className asSymbol
 ]
 
 { #category : #helper }

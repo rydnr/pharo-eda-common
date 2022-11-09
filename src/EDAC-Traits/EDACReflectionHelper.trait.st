@@ -30,6 +30,24 @@ EDACReflectionHelper classSide >> doesInstance: anInstance understand: aString [
 	^ anInstance respondsTo: aString
 ]
 
+{ #category : #helper }
+EDACReflectionHelper >> classExists: className [
+
+	^ (self classOrTraitNamed: className) isNotNil
+]
+
+{ #category : #helper }
+EDACReflectionHelper >> classOrTraitExists: className [
+
+	^ (self classOrTraitNamed: className) isNotNil
+]
+
+{ #category : #helper }
+EDACReflectionHelper >> classOrTraitNamed: className [
+
+	^ SmalltalkImage current classOrTraitNamed: className asSymbol
+]
+
 { #category : #helpers }
 EDACReflectionHelper >> doesInstance: anInstance understand: aString [
 	^ self class doesInstance: anInstance understand: aString
