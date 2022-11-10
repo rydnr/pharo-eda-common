@@ -26,8 +26,8 @@ EDACLoggingSettings class >> debugEnabled: aBoolean [
 
 { #category : #'class initialization' }
 EDACLoggingSettings class >> doInitialize [
-	self loggingLevel: 'debug'
 
+	self level: 'debug'
 ]
 
 { #category : #accessing }
