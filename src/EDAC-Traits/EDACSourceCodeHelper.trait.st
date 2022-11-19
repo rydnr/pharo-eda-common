@@ -191,6 +191,28 @@ EDACSourceCodeHelper >> isMethod: aMethodName markedAsDisableRegenerationInClass
 ]
 
 { #category : #helper }
+EDACSourceCodeHelper >> lowcased: aString andSeparatedBy: aSeparator [
+
+	| aux |
+	aux := '_' asRegexIgnoringCase
+		       copy: aString
+		       replacingMatchesWith: aSeparator.
+	^ aux asLowercase
+]
+
+{ #category : #helper }
+EDACSourceCodeHelper >> lowcasedToDashSeparatedBy: aString [
+
+	^ self lowcased: aString andSeparatedBy: '-'
+]
+
+{ #category : #helper }
+EDACSourceCodeHelper >> lowcasedToDotSeparatedBy: aString [
+
+	^ self lowcased: aString andSeparatedBy: '.'
+]
+
+{ #category : #helper }
 EDACSourceCodeHelper >> normalize: aString [
 	^ (self replace: '\W' with: '_' inString: aString trimmed) asLowercase
 ]
@@ -282,8 +304,23 @@ EDACSourceCodeHelper >> underscoreSeparatedToCamelCase: aString [
 ]
 
 { #category : #helper }
-EDACSourceCodeHelper >> upcasedToDotSeparated: aString [
+EDACSourceCodeHelper >> upcased: aString andSeparatedBy: aSeparator [
+
 	| aux |
-	aux := '_' asRegexIgnoringCase copy: aString replacingMatchesWith: '.'.
+	aux := '_' asRegexIgnoringCase
+		       copy: aString
+		       replacingMatchesWith: aSeparator.
 	^ aux asLowercase
+]
+
+{ #category : #helper }
+EDACSourceCodeHelper >> upcasedToDashSeparated: aString [
+
+	^ self upcased: aString andSeparatedBy: '-'
+]
+
+{ #category : #helper }
+EDACSourceCodeHelper >> upcasedToDotSeparated: aString [
+
+	^ self upcased: aString andSeparatedBy: '.'
 ]
