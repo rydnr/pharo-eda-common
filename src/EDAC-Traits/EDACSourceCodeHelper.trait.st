@@ -147,6 +147,12 @@ EDACSourceCodeHelper >> csvToCollection: aString [
 ]
 
 { #category : #helper }
+EDACSourceCodeHelper >> dashSeparatedToCamelCase: aString [
+
+	^ self toCamelCase: aString usingSeparator: '-'
+]
+
+{ #category : #helper }
 EDACSourceCodeHelper >> dotSeparatedToCamelCase: aString [
 	^ self toCamelCase: aString usingSeparator: '\.'
 
@@ -284,7 +290,8 @@ EDACSourceCodeHelper >> separateCamelCase: aString with: aSeparator [
 
 { #category : #helper }
 EDACSourceCodeHelper >> toCamelCase: aString [
-	^ self underscoreSeparatedToCamelCase: aString asCamelCase 
+
+	^ self dashSeparatedToCamelCase: (self underscoreSeparatedToCamelCase: aString asCamelCase)
 ]
 
 { #category : #helper }
