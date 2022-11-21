@@ -17,20 +17,8 @@ Class {
 	#category : #BaselineOfPharoEDACommon
 }
 
-{ #category : #baselines }
-BaselineOfPharoEDACommon >> baseline: spec [
-
-	<baseline>
-	spec for: #common do: [ 
-		spec blessing: #baseline.
-		spec postLoadDoIt: #postload:package:.
-		self declarePackagesIn: spec;
-		 declareGroupsIn: spec;
-					includeNeoJSON: spec ]
-]
-
 { #category : #meta }
-BaselineOfPharoEDACommon >> declareGroupsIn: spec [
+BaselineOfPharoEDACommon class >> declareGroupsIn: spec [
 
 	spec
 		group: 'core'
@@ -43,7 +31,7 @@ BaselineOfPharoEDACommon >> declareGroupsIn: spec [
 ]
 
 { #category : #meta }
-BaselineOfPharoEDACommon >> declarePackagesIn: spec [
+BaselineOfPharoEDACommon class >> declarePackagesIn: spec [
 
 	spec
 		package: #'EDAC-Fuel';
@@ -64,12 +52,25 @@ BaselineOfPharoEDACommon >> declarePackagesIn: spec [
 ]
 
 { #category : #baselines }
-BaselineOfPharoEDACommon >> includeNeoJSON: spec [
+BaselineOfPharoEDACommon class >> includeNeoJSON: spec [
 
 	spec
 		baseline: 'NeoJSON'
 		with: [ spec repository: 'github://svenvc/NeoJSON/repository' ].
 	^ spec
+]
+
+{ #category : #baselines }
+BaselineOfPharoEDACommon >> baseline: spec [
+
+	<baseline>
+	spec for: #common do: [ 
+		spec blessing: #baseline.
+		spec postLoadDoIt: #postload:package:.
+		self class
+			declarePackagesIn: spec;
+			declareGroupsIn: spec;
+			includeNeoJSON: spec ]
 ]
 
 { #category : #hooks }
