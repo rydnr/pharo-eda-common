@@ -5,9 +5,13 @@ Trait {
 
 { #category : #helper }
 EDACSettingBrowserHelper classSide >> refreshSettingBrowsers [
-	self currentWorld submorphs
+
+	SettingBrowser refreshAllSettingBrowsers.
+	"self currentWorld submorphs
 		select: [ :w | w model class = SettingBrowser ]
-		thenCollect: [ :w | w delete. SettingBrowser open ]
+		thenCollect: [ :w | 
+			w delete.
+			SettingBrowser open ]"
 ]
 
 { #category : #helper }
