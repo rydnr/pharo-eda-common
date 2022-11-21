@@ -24,8 +24,9 @@ BaselineOfPharoEDACommon >> baseline: spec [
 	spec for: #common do: [ 
 		spec blessing: #baseline.
 		spec postLoadDoIt: #postload:package:.
-		self declarePackagesIn: spec.
-		self declareGroupsIn: spec ]
+		self declarePackagesIn: spec;
+		 declareGroupsIn: spec;
+					includeNeoJSON: spec ]
 ]
 
 { #category : #meta }
@@ -60,6 +61,15 @@ BaselineOfPharoEDACommon >> declarePackagesIn: spec [
 		package: #'EDAC-Settings';
 		package: #'EDAC-Settings-Tests'
 		with: [ spec requires: #( 'EDAC-Settings' ) ]
+]
+
+{ #category : #baselines }
+BaselineOfPharoEDACommon >> includeNeoJSON: spec [
+
+	spec
+		baseline: 'NeoJSON'
+		with: [ spec repository: 'github://svenvc/NeoJSON/repository' ].
+	^ spec
 ]
 
 { #category : #hooks }
