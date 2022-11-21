@@ -38,61 +38,6 @@ EDACErrorHelper classSide >> errorFolderFor: basename [
 	^ result
 ]
 
-{ #category : #logging }
-EDACErrorHelper classSide >> logDebugMessage: aMessage beautify: aBoolean [
-	EDACLoggingSettings debugEnabled
-		ifTrue: [ self
-				logMessage: aMessage
-				inCategory: 'DEBUG'
-				inStream: self defaultStream
-				beautify: aBoolean ]
-]
-
-{ #category : #logging }
-EDACErrorHelper classSide >> logErrorMessage: aMessage beautify: aBoolean [
-	EDACLoggingSettings errorEnabled
-		ifTrue: [ self
-				logMessage: aMessage
-				inCategory: 'ERROR'
-				inStream: self defaultStream
-				beautify: aBoolean ]
-]
-
-{ #category : #logging }
-EDACErrorHelper classSide >> logInfoMessage: aMessage beautify: aBoolean [
-	EDACLoggingSettings infoEnabled
-		ifTrue: [ self
-				logMessage: aMessage
-				inCategory: 'INFO '
-				inStream: self defaultStream
-				beautify: aBoolean ]
-]
-
-{ #category : #logging }
-EDACErrorHelper classSide >> logTraceMessage: aMessage beautify: aBoolean [
-	EDACLoggingSettings traceEnabled
-		ifTrue: [ self
-				logMessage: aMessage
-				inCategory: 'TRACE'
-				inStream: self defaultStream
-				beautify: aBoolean ]
-]
-
-{ #category : #logging }
-EDACErrorHelper classSide >> logWarningMessage: aMessage beautify: aBoolean [
-	^ EDACLoggingSettings warningEnabled
-		ifTrue: [ self
-				logMessage: aMessage
-				inCategory: 'WARN '
-				inStream: self defaultStream
-				beautify: aBoolean ]
-]
-
-{ #category : #handling }
-EDACErrorHelper >> logErrorMessage: aString [
-	^ EDACLoggingStub new logErrorMessage: aString
-]
-
 { #category : #handling }
 EDACErrorHelper >> manageError: anException forCommand: aCommand usingErrorStrategy: aStrategy [
 	| errorHandler result context basename dictionary |
