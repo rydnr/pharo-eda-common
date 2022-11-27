@@ -164,10 +164,10 @@ EDACErrorHelper >> writeFuelContext: aContext named: aString withBasename: aBase
 
 { #category : #handling }
 EDACErrorHelper >> writeMessage: aString withBasename: aBasename [
+
 	| result |
 	result := (self class errorFolderFor: aBasename) / 'message.txt'.
-	(WriteStream on: result)
-		nextPutAll: aString;
-		close.
+	result writeStreamDo: [ :s | s nextPutAll: aString;
+		close ].
 	^ result
 ]
