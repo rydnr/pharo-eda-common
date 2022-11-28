@@ -20,6 +20,8 @@ Public API and Key Messages:
 "
 Trait {
 	#name : #EDACErrorHelper,
+	#traits : 'EDACReflectionHelper',
+	#classTraits : 'EDACReflectionHelper classTrait',
 	#category : #'EDAC-Traits'
 }
 
@@ -39,32 +41,31 @@ EDACErrorHelper classSide >> errorFolderFor: basename [
 ]
 
 { #category : #handling }
-EDACErrorHelper >> manageError: anException forCommand: aCommand usingErrorStrategy: aStrategy [
+EDACErrorHelper >> manageError: anException forCommand: aCommand usingErrorStrategy: aStrategyClass [
 	| errorHandler result context basename dictionary |
-	errorHandler := (self class environment at: aStrategy asSymbol) new.
-	errorHandler class shouldPersistFuel
-		ifTrue: [ self
-				logErrorMessage:
-					'Error processing ' , aCommand printString , ': '
-						, anException description printString.
-			context := thisContext clone.
-			basename := self class basename.
-			self
-				writeFuelContext: context
-				named: anException class printString
-				withBasename: basename.
-			self writeCommand: aCommand withBasename: basename ].
+	errorHandler := aStrategyClass new.
+	errorHandler class shouldPersistFuel ifTrue: [
+        self logErrorMessage:
+			'Error processing ' , aCommand printString , ': '
+			, anException description printString.
+		context := thisContext clone.
+		basename := self class basename.
+		self
+			writeFuelContext: context
+			named: anException class printString
+			withBasename: basename.
+		self writeCommand: aCommand withBasename: basename ].
 	errorHandler context: context.
 	dictionary := Dictionary new.
 	dictionary at: #command put: aCommand.
 	result := errorHandler
-		handleError: anException
-		withExtraContextInformation: dictionary.
+				handleError: anException
+				withExtraContextInformation: dictionary.
 	^ result
 ]
 
 { #category : #handling }
-EDACErrorHelper >> manageError: anException forMessage: aString usingErrorStrategy: aStrategy [
+EDACErrorHelper >> manageError: anException forMessage: aString usingErrorStrategy: aStrategyClass [
 	| errorHandler result context basename dictionary |
 	self
 		logErrorMessage:
@@ -78,8 +79,8 @@ EDACErrorHelper >> manageError: anException forMessage: aString usingErrorStrate
 		writeFuelContext: context
 		named: anException class printString withBasename: basename.
 	self writeMessage: aString withBasename: basename.
-	errorHandler := (self class environment at: aStrategy asSymbol) new
-		context: context.
+	errorHandler := aStrategyClass new.
+	errorHandler context: context.
 	result := errorHandler
 		handleError: anException
 		withExtraContextInformation: dictionary.
@@ -87,7 +88,7 @@ EDACErrorHelper >> manageError: anException forMessage: aString usingErrorStrate
 ]
 
 { #category : #handling }
-EDACErrorHelper >> manageError: anException usingErrorStrategy: aStrategy [
+EDACErrorHelper >> manageError: anException usingErrorStrategy: aStrategyClass [
 	| errorHandler result context basename |
 	self
 		logErrorMessage: 'Error detected: ' , anException description printString.
@@ -97,8 +98,8 @@ EDACErrorHelper >> manageError: anException usingErrorStrategy: aStrategy [
 		writeFuelContext: context
 		named: anException class printString
 		withBasename: basename.
-	errorHandler := (self class environment at: aStrategy asSymbol) new
-		context: context.
+	errorHandler := aStrategyClass new.
+    errorHandler context: context.
 	result := errorHandler
 		handleError: anException
 		withExtraContextInformation: Dictionary new.
@@ -106,7 +107,7 @@ EDACErrorHelper >> manageError: anException usingErrorStrategy: aStrategy [
 ]
 
 { #category : #handling }
-EDACErrorHelper >> manageError: anException whenProjectingEvent: anEvent usingErrorStrategy: aStrategy [
+EDACErrorHelper >> manageError: anException whenProjectingEvent: anEvent usingErrorStrategy: aStrategyClass [
 	| errorHandler result context basename dictionary |
 	self
 		logErrorMessage:
@@ -121,8 +122,8 @@ EDACErrorHelper >> manageError: anException whenProjectingEvent: anEvent usingEr
 				, '.txt'
 		withBasename: basename.
 	self writeEvent: anEvent printString withBasename: basename.
-	errorHandler := (self class environment at: aStrategy asSymbol) new
-		context: context.
+	errorHandler := aStrategyClass new.
+    errorHandler context: context.
 	dictionary := Dictionary new.
 	dictionary at: #event put: anEvent.
 	result := errorHandler
