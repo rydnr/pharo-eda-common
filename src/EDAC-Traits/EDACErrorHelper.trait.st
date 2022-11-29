@@ -134,22 +134,25 @@ EDACErrorHelper >> manageError: anException whenProjectingEvent: anEvent usingEr
 
 { #category : #handling }
 EDACErrorHelper >> writeCommand: aCommand withBasename: aBasename [
+
 	| result |
 	result := (self class errorFolderFor: aBasename)
-		/ (aCommand class printString , '.txt').
-	(WriteStream on: result)
-		nextPutAll: aCommand printString;
-		close.
+	          / (aCommand class printString , '.txt').
+	result writeStreamDo: [ :s |
+		s
+			nextPutAll: aCommand printString;
+			close ].
 	^ result
 ]
 
 { #category : #handling }
 EDACErrorHelper >> writeEvent: aString withBasename: aBasename [
+
 	| result |
 	result := (self class errorFolderFor: aBasename) / 'event.txt'.
-	(WriteStream on: result)
+	result writeStreamDo: [ :s | s
 		nextPutAll: aString;
-		close.
+		close ].
 	^ result
 ]
 
