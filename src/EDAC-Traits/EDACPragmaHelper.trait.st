@@ -69,7 +69,7 @@ EDACPragmaHelper classSide >> retrievePragmas: aSymbol in: aClass [
 	result := Pragma allNamed: aSymbol in: aClass.
 	result ifEmpty: [ 
 		self errorClass new signal:
-			'No pragma <' , aSymbol greaseString , '> found' ].
+			'No pragma <' , aSymbol greaseString , '> found in ', aClass greaseString].
 	^ result
 ]
 
