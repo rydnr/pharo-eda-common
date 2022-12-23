@@ -45,7 +45,7 @@ EDACReflectionHelper >> classOrTraitExists: className [
 { #category : #helper }
 EDACReflectionHelper >> classOrTraitNamed: className [
 
-	^ SmalltalkImage current classOrTraitNamed: className asSymbol
+	^ className isNotNil and: [ SmalltalkImage current classOrTraitNamed: className asSymbol ]
 ]
 
 { #category : #helpers }
