@@ -1,6 +1,7 @@
 *.changes
 *.chg
 credentials.st
+.*_st.done
 *.errors
 /github-cache
 github-*.zip
