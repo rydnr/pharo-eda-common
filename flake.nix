@@ -4,7 +4,7 @@
   inputs = rec {
     flake-utils.url = "github:numtide/flake-utils/v1.0.0";
     nixpkgs.url = "github:NixOS/nixpkgs/release-24.11";
-    pharo-vm-12 = {
+    rydnr-nix-flakes-pharo-vm = {
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:rydnr/nix-flakes/pharo-vm-12.0.1519.4?dir=pharo-vm";
@@ -17,7 +17,7 @@
         org = "rydnr";
         repo = "pharo-eda-common";
         pname = "${repo}";
-        tag = "0.1.1";
+        tag = "0.1.2";
         baseline = "PharoEDACommon";
         pkgs = import nixpkgs { inherit system; };
         description = "Classes shared among PharoEDA components.";
@@ -128,10 +128,10 @@
         packages = rec {
           default = pharo-eda-common-12;
           pharo-eda-common-12 = pharo-eda-common-for rec {
-            bootstrap-image-url = pharo-vm-12.resources.${system}.bootstrap-image-url;
-            bootstrap-image-sha256 = pharo-vm-12.resources.${system}.bootstrap-image-sha256;
-            bootstrap-image-name = pharo-vm-12.resources.${system}.bootstrap-image-name;
-            pharo-vm = pharo-vm-12.packages.${system}.pharo-vm;
+            bootstrap-image-url = rydnr-nix-flakes-pharo-vm.resources.${system}.bootstrap-image-url;
+            bootstrap-image-sha256 = rydnr-nix-flakes-pharo-vm.resources.${system}.bootstrap-image-sha256;
+            bootstrap-image-name = rydnr-nix-flakes-pharo-vm.resources.${system}.bootstrap-image-name;
+            pharo-vm = rydnr-nix-flakes-pharo-vm.packages.${system}.pharo-vm;
           };
         };
       });
