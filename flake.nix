@@ -17,7 +17,7 @@
         org = "rydnr";
         repo = "pharo-eda-common";
         pname = "${repo}";
-        tag = "0.1.0";
+        tag = "0.1.1";
         baseline = "PharoEDACommon";
         pkgs = import nixpkgs { inherit system; };
         description = "Classes shared among PharoEDA components.";
@@ -58,15 +58,16 @@
 
             unpackPhase = ''
               unzip -o ${bootstrap-image} -d image
+              cp -r ${src} src
+              mkdir -p $out/share/src/${pname}
+              cp -r ${neojson}/repository $out/share/src/neojson
             '';
 
             configurePhase = ''
               runHook preConfigure
 
-              # copy src
-              cp -r ${src} src
               substituteInPlace src/BaselineOfPharoEDACommon/BaselineOfPharoEDACommon.class.st \
-                --replace-fail "github://svenvc/NeoJSON/repository" "filetree://${neojson}/repository"
+                --replace-fail "github://svenvc/NeoJSON/repository" "filetree://$out/share/src/neojson"
               # load baseline
               ${pharo-vm}/bin/pharo image/${bootstrap-image-name} eval --save "EpMonitor current disable. NonInteractiveTranscript stdout install. [ Metacello new repository: 'tonel://$PWD/src'; baseline: '${baseline}'; onConflictUseLoaded; load ] ensure: [ EpMonitor current enable ]"
 
@@ -93,9 +94,12 @@
               cp -r ${pharo-vm}/lib $out
               cp -r dist/* $out/
               cp image/*.sources $out/
-              mkdir $out/share
-              pushd ${src}
-              ${pkgs.zip}/bin/zip -r $out/share/src.zip .
+              pushd src
+              cp -r . $out/share/src/${pname}
+              ${pkgs.zip}/bin/zip -r $out/share/${pname}.zip .
+              popd
+              pushd ${neojson}/repository
+              ${pkgs.zip}/bin/zip -r $out/share/neojson.zip .
               popd
 
               runHook postInstall

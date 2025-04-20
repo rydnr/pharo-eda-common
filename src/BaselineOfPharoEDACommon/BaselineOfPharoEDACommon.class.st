@@ -76,7 +76,6 @@ BaselineOfPharoEDACommon >> baseline: spec [
 { #category : #hooks }
 BaselineOfPharoEDACommon >> postload: loader package: packageSpec [
 
-	| location |
 	Locale localeID: 'es'.
 	(IceRepository registry
 		 detect: [ :each | each name = 'pharo-eda-common' ]
